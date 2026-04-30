@@ -3,11 +3,25 @@
 <header class="site-header" data-header>
   <div class="container site-header__inner">
     <a class="site-logo" href="index.html" aria-label="Asphalt 365 Home">
-      <span class="site-logo__mark">A365</span>
-      <span class="site-logo__text">Asphalt 365</span>
+  <picture class="site-logo__picture">
+  <source srcset="images/logo-asphalt-365.avif" type="image/avif">
+  <source srcset="images/logo-asphalt-365.webp" type="image/webp">
+  <img
+    src="images/logo-asphalt-365.png"
+    alt="Asphalt 365"
+    width="168"
+    height="52"
+  >
+</picture>
     </a>
 
-    <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      data-nav-toggle
+    >
       <span></span>
       <span></span>
       <span></span>
@@ -22,7 +36,7 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
 
-      <a class="btn btn-primary site-nav__cta" href="contact.html">
+      <a class="site-nav__cta" href="contact.html">
         Free Estimates
       </a>
     </nav>

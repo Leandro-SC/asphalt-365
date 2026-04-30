@@ -1,19 +1,22 @@
 const gulp = require("gulp");
 const sass = require("gulp-sass")(require("sass"));
-const autoprefixer = require("gulp-autoprefixer");
+const autoprefixer = require("gulp-autoprefixer").default;
 const cleanCSS = require("gulp-clean-css");
 const terser = require("gulp-terser");
 const concat = require("gulp-concat");
-const imagemin = require("gulp-imagemin");
 const browserSync = require("browser-sync").create();
 const fileInclude = require("gulp-file-include");
+const sharp = require("sharp");
+const through2 = require("through2");
+const path = require("path");
+const fs = require("fs");
 
 const paths = {
   html: "src/html/*.html",
   partials: "src/html/partials/*.html",
   scss: "src/scss/**/*.scss",
   js: "src/js/**/*.js",
-  images: "src/images/**/*",
+  images: "src/images/**/*.{jpg,jpeg,png,svg}",
   build: "build"
 };
 
@@ -55,9 +58,57 @@ function scripts() {
 
 function images() {
   return gulp
-    .src(paths.images)
-    .pipe(imagemin())
-    .pipe(gulp.dest("build/images"));
+    .src(paths.images, { encoding: false })
+    .pipe(
+      through2.obj(function (file, _, cb) {
+        if (file.isNull()) {
+          cb(null, file);
+          return;
+        }
+
+        const ext = path.extname(file.path).toLowerCase();
+        const supportedRasterFormats = [".jpg", ".jpeg", ".png"];
+        const supportedSvgFormats = [".svg"];
+
+        const sourceRoot = path.resolve("src/images");
+        const outputRoot = path.resolve("build/images");
+        const relativePath = path.relative(sourceRoot, file.path);
+        const relativeDir = path.dirname(relativePath);
+        const outputDir = path.join(outputRoot, relativeDir);
+
+        fs.mkdirSync(outputDir, { recursive: true });
+
+        if (supportedSvgFormats.includes(ext)) {
+          fs.writeFileSync(path.join(outputDir, path.basename(file.path)), file.contents);
+          cb();
+          return;
+        }
+
+        if (!supportedRasterFormats.includes(ext)) {
+          cb();
+          return;
+        }
+
+        const fileName = path.basename(file.path, ext);
+        const originalExt = ext === ".jpeg" ? ".jpg" : ext;
+
+        Promise.all([
+          sharp(file.contents)
+            .jpeg({ quality: 82, progressive: true })
+            .toFile(path.join(outputDir, `${fileName}${originalExt}`)),
+
+          sharp(file.contents)
+            .webp({ quality: 82 })
+            .toFile(path.join(outputDir, `${fileName}.webp`)),
+
+          sharp(file.contents)
+            .avif({ quality: 58 })
+            .toFile(path.join(outputDir, `${fileName}.avif`))
+        ])
+          .then(() => cb())
+          .catch(cb);
+      })
+    );
 }
 
 function staticFiles() {

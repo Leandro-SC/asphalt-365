@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://asphalt365.com/sitemap.xml

@@ -1,3 +1,18 @@
+html,
+body {
+  width: 100%;
+  overflow-x: clip;
+}
+
+body {
+  min-width: 320px;
+}
+
+img,
+picture {
+  max-width: 100%;
+}
+
 body {
   overflow-x: hidden;
 }
