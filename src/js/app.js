@@ -237,3 +237,34 @@ document.addEventListener("DOMContentLoaded", () => {
     startAutoplay();
   }
 });
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const revealItems = document.querySelectorAll("[data-reveal]");
+
+  if (window.gsap && window.ScrollTrigger && revealItems.length) {
+    gsap.registerPlugin(ScrollTrigger);
+
+    revealItems.forEach((item) => {
+      gsap.fromTo(
+        item,
+        {
+          autoAlpha: 0,
+          y: 28
+        },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.75,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: item,
+            start: "top 86%",
+            once: true
+          }
+        }
+      );
+    });
+  }
+});

@@ -83,4 +83,13 @@ main {
 [data-reveal] {
   opacity: 0;
   transform: translateY(32px);
+  will-change: opacity, transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
 }

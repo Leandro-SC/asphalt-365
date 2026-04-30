@@ -10,6 +10,10 @@ const sharp = require("sharp");
 const through2 = require("through2");
 const path = require("path");
 const fs = require("fs");
+const ffmpeg = require("fluent-ffmpeg");
+const ffmpegInstaller = require("@ffmpeg-installer/ffmpeg");
+
+ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
 const paths = {
   html: "src/html/*.html",
@@ -17,6 +21,7 @@ const paths = {
   scss: "src/scss/**/*.scss",
   js: "src/js/**/*.js",
   images: "src/images/**/*.{jpg,jpeg,png,svg}",
+  videos: "src/videos/**/*.{mp4,mov,avi,mkv,webm}",
   build: "build"
 };
 
@@ -111,6 +116,72 @@ function images() {
     );
 }
 
+
+function videos(done) {
+  const videoFiles = [];
+
+  gulp
+    .src(paths.videos, { read: false })
+    .on("data", (file) => {
+      videoFiles.push(file.path);
+    })
+    .on("end", async () => {
+      for (const filePath of videoFiles) {
+        const ext = path.extname(filePath).toLowerCase();
+        const fileName = path.basename(filePath, ext);
+
+        const sourceRoot = path.resolve("src/videos");
+        const outputRoot = path.resolve("build/videos");
+
+        const relativePath = path.relative(sourceRoot, filePath);
+        const relativeDir = path.dirname(relativePath);
+
+        const outputDir = path.join(outputRoot, relativeDir);
+
+        fs.mkdirSync(outputDir, { recursive: true });
+
+        const mp4Output = path.join(outputDir, `${fileName}.mp4`);
+        const webmOutput = path.join(outputDir, `${fileName}.webm`);
+
+        // MP4 optimizado
+        await new Promise((resolve, reject) => {
+          ffmpeg(filePath)
+            .videoCodec("libx264")
+            .outputOptions([
+              "-crf 28",
+              "-preset slow",
+              "-movflags +faststart"
+            ])
+            .audioCodec("aac")
+            .audioBitrate("128k")
+            .size("?x720")
+            .save(mp4Output)
+            .on("end", resolve)
+            .on("error", reject);
+        });
+
+        // WEBM optimizado
+        await new Promise((resolve, reject) => {
+          ffmpeg(filePath)
+            .videoCodec("libvpx-vp9")
+            .outputOptions([
+              "-crf 32",
+              "-b:v 0"
+            ])
+            .noAudio()
+            .size("?x720")
+            .save(webmOutput)
+            .on("end", resolve)
+            .on("error", reject);
+        });
+
+        console.log(`✔ Video optimizado: ${fileName}`);
+      }
+
+      done();
+    });
+}
+
 function staticFiles() {
   return gulp
     .src(["robots.txt", "sitemap.xml", ".htaccess"], { allowEmpty: true })
@@ -130,14 +201,16 @@ function serve() {
   gulp.watch(paths.scss, styles);
   gulp.watch(paths.js, scripts);
   gulp.watch(paths.images, images);
+  gulp.watch(paths.videos, videos);
 }
 
-const build = gulp.series(html, styles, scripts, images, staticFiles);
+const build = gulp.series(html, styles, scripts, images, videos, staticFiles);
 const dev = gulp.series(build, serve);
 
 exports.html = html;
 exports.styles = styles;
 exports.scripts = scripts;
 exports.images = images;
+exports.videos = videos;
 exports.build = build;
 exports.default = dev;

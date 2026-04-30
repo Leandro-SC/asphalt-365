@@ -3,9 +3,20 @@
   top: 0;
   z-index: 1000;
   width: 100%;
-  color: var(--color-white);
-  background: rgba(8, 8, 8, 0.94);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-black);
+
+  /* Fondo claro para logo oscuro */
+  background: rgba(255, 255, 255, 0.96);
+
+  /* borde suave */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+  /* efecto glass elegante */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  /* sombra ligera */
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
 }
 
 .site-header__inner {
@@ -13,8 +24,11 @@
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  min-height: 78px;
-  gap: 1.25rem;
+
+  /* más altura para logo grande */
+  min-height: 118px;
+
+  gap: 1.5rem;
 }
 
 .site-logo {
@@ -23,18 +37,26 @@
   display: inline-flex;
   align-items: center;
   width: fit-content;
-  max-width: 180px;
+
+  /* logo mucho más grande */
+  max-width: 420px;
 }
 
 .site-logo img,
 .site-logo__picture img {
   display: block;
   width: auto;
-  max-width: 168px;
-  height: auto;
-  max-height: 52px;
+
+  /* tamaño incrementado */
+  max-width: 420px;
+  max-height: 96px;
+
   object-fit: contain;
 }
+
+/* =========================
+   MENÚ DESKTOP
+========================= */
 
 .site-nav {
   display: contents;
@@ -43,9 +65,11 @@
 .site-nav__list {
   grid-column: 2;
   justify-self: center;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   gap: clamp(1rem, 2.2vw, 2rem);
 }
 
@@ -54,10 +78,14 @@
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
-  color: rgba(255, 255, 255, 0.76);
-  font-size: 0.92rem;
+
+  /* texto oscuro */
+  color: rgba(0, 0, 0, 0.72);
+
+  font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.01em;
+
   transition: color var(--transition-base);
 }
 
@@ -67,16 +95,19 @@
   left: 0;
   right: 0;
   bottom: 0.45rem;
+
   height: 2px;
   background: var(--color-yellow);
+
   transform: scaleX(0);
   transform-origin: center;
+
   transition: transform var(--transition-base);
 }
 
 .site-nav__list a:hover,
 .site-nav__list a:focus-visible {
-  color: var(--color-white);
+  color: var(--color-black);
 }
 
 .site-nav__list a:hover::after,
@@ -84,21 +115,32 @@
   transform: scaleX(1);
 }
 
+/* =========================
+   BOTÓN CTA
+========================= */
+
 .site-nav__cta {
   grid-column: 3;
   justify-self: end;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 2.9rem;
-  padding-inline: 1.15rem;
+
+  min-height: 3rem;
+  padding-inline: 1.2rem;
+
   color: var(--color-black);
   background: var(--color-yellow);
+
   border: 1px solid var(--color-yellow);
   border-radius: 999px;
-  font-size: 0.9rem;
+
+  font-size: 0.92rem;
   font-weight: 800;
+
   white-space: nowrap;
+
   transition:
     color var(--transition-base),
     background var(--transition-base),
@@ -109,20 +151,30 @@
 .site-nav__cta:hover,
 .site-nav__cta:focus-visible {
   color: var(--color-white);
-  background: transparent;
-  border-color: rgba(255, 255, 255, 0.34);
+  background: var(--color-black);
+  border-color: var(--color-black);
+
   transform: translateY(-1px);
 }
+
+/* =========================
+   HAMBURGUESA
+========================= */
 
 .nav-toggle {
   position: relative;
   z-index: 1002;
+
   display: none;
-  width: 2.75rem;
-  height: 2.75rem;
+
+  width: 2.9rem;
+  height: 2.9rem;
+
   justify-self: end;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.22);
+
+  background: rgba(0, 0, 0, 0.04);
+
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 50%;
 }
 
@@ -131,8 +183,11 @@
   width: 1.2rem;
   height: 2px;
   margin: 4px auto;
-  background: var(--color-white);
+
+  background: var(--color-black);
+
   border-radius: 999px;
+
   transition:
     transform var(--transition-base),
     opacity var(--transition-base);
@@ -150,17 +205,22 @@
   transform: translateY(-6px) rotate(-45deg);
 }
 
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media (max-width: 960px) {
+
   .site-header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-height: 72px;
+
+    min-height: 88px;
   }
 
   .site-logo {
-    max-width: 150px;
+    max-width: 240px;
     flex: 0 0 auto;
   }
 
@@ -168,8 +228,10 @@
   .site-logo__picture img {
     display: block;
     width: auto;
-    max-width: 148px;
-    max-height: 46px;
+
+    max-width: 230px;
+    max-height: 68px;
+
     object-fit: contain;
   }
 
@@ -181,9 +243,10 @@
 
   .site-nav {
     position: fixed;
-    top: 72px;
+    top: 88px;
     left: 1rem;
     right: 1rem;
+
     z-index: 1001;
 
     display: flex;
@@ -192,19 +255,27 @@
 
     width: auto;
     max-width: none;
-    max-height: calc(100svh - 88px);
+
+    max-height: calc(100svh - 104px);
+
     padding: 1rem;
 
     visibility: hidden;
     opacity: 0;
+
     overflow-y: auto;
 
-    background: rgba(8, 8, 8, 0.97);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    /* menú claro */
+    background: rgba(255, 255, 255, 0.98);
+
+    border: 1px solid rgba(0, 0, 0, 0.08);
+
     border-radius: 1.25rem;
-    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.12);
 
     transform: translateY(-10px);
+
     transition:
       opacity var(--transition-base),
       visibility var(--transition-base),
@@ -220,6 +291,7 @@
   .site-nav__list {
     display: flex;
     flex-direction: column;
+
     gap: 0.25rem;
     width: 100%;
   }
@@ -234,11 +306,12 @@
     justify-content: flex-start;
 
     width: 100%;
-    min-height: 3.05rem;
+    min-height: 3.1rem;
+
     padding: 0 1rem;
 
-    color: rgba(255, 255, 255, 0.86);
-    background: transparent;
+    color: rgba(0, 0, 0, 0.85);
+
     border-radius: 0.85rem;
 
     font-size: 0.96rem;
@@ -252,84 +325,40 @@
 
   .site-nav__list a:hover,
   .site-nav__list a:focus-visible {
-    color: var(--color-white);
-    background: rgba(255, 255, 255, 0.08);
-  }
-
-  .site-nav__cta {
-    grid-column: auto;
-    justify-self: auto;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-    max-width: none;
-    min-width: 0;
-    min-height: 3.15rem;
-
-    padding: 0 1rem;
-    margin: 0.35rem 0 0;
-
     color: var(--color-black);
-    background: var(--color-yellow);
-    border: 1px solid var(--color-yellow);
-    border-radius: 0.9rem;
-
-    font-size: 0.96rem;
-    font-weight: 900;
-    line-height: 1;
-    text-align: center;
-    white-space: nowrap;
-
-    transform: none;
-    box-shadow: none;
-  }
-
-  .site-nav__cta:hover,
-  .site-nav__cta:focus-visible {
-    color: var(--color-black);
-    background: var(--color-yellow-dark);
-    border-color: var(--color-yellow-dark);
-    transform: none;
+    background: rgba(0, 0, 0, 0.05);
   }
 }
 
+/* =========================
+   MOBILE PEQUEÑO
+========================= */
+
 @media (max-width: 420px) {
+
   .site-header__inner {
-    min-height: 68px;
+    min-height: 78px;
   }
 
   .site-logo {
-    max-width: 136px;
+    max-width: 200px;
   }
 
   .site-logo img,
   .site-logo__picture img {
-    max-width: 132px;
-    max-height: 42px;
+    max-width: 190px;
+    max-height: 58px;
   }
 
   .site-nav {
-    top: 68px;
+    top: 78px;
     left: 0.75rem;
     right: 0.75rem;
-    max-height: calc(100svh - 82px);
+
+    max-height: calc(100svh - 92px);
+
     padding: 0.85rem;
+
     border-radius: 1.1rem;
-  }
-
-  .site-nav__list a {
-    min-height: 2.9rem;
-    padding-inline: 0.9rem;
-    font-size: 0.94rem;
-  }
-
-  .site-nav__cta {
-    min-height: 3rem;
-    padding-inline: 0.9rem;
-    font-size: 0.94rem;
-    border-radius: 0.85rem;
   }
 }

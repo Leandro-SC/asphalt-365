@@ -1,3 +1,5 @@
+/**************Sección Banner****************/
+
 .hero-carousel {
   position: relative;
   width: 100%;
@@ -265,11 +267,10 @@
 .hero-carousel__shape {
   position: absolute;
   left: 50%;
-  bottom: -54px;
+  bottom: -48px;
   z-index: 5;
   width: 120vw;
-  max-width: none;
-  height: 110px;
+  height: 96px;
   background: var(--color-white);
   border-radius: 50%;
   transform: translateX(-50%);
@@ -452,5 +453,190 @@
   .hero-slide__image {
     transform: none;
     will-change: auto;
+  }
+}
+
+
+
+/****************Seccion Servicios******************/
+.home-services {
+  position: relative;
+  z-index: 6;
+  overflow: hidden;
+  background: var(--color-white);
+  padding-top: clamp(2.5rem, 4vw, 4rem);
+}
+
+
+.home-services__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.service-card {
+  position: relative;
+  display: grid;
+  gap: 0.9rem;
+  min-height: 100%;
+  padding: clamp(1.25rem, 4vw, 1.75rem);
+  overflow: hidden;
+  background: var(--color-white);
+  border: 1px solid rgba(8, 8, 8, 0.1);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 18px 48px rgba(8, 8, 8, 0.06);
+  transition:
+    transform var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-black);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(8, 8, 8, 0.22);
+  box-shadow: 0 24px 70px rgba(8, 8, 8, 0.13);
+}
+
+.service-card:hover::before,
+.service-card--highlight::before {
+  opacity: 1;
+}
+
+.service-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.service-card__number {
+  color: rgba(8, 8, 8, 0.34);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.service-card__icon {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  background: var(--color-yellow);
+  border-radius: 50%;
+}
+
+.service-card__icon span {
+  display: block;
+  width: 1.15rem;
+  height: 1.15rem;
+  border: 3px solid var(--color-black);
+  border-top-color: transparent;
+  border-left-color: transparent;
+  transform: rotate(-45deg);
+}
+
+.service-card h3 {
+  max-width: 260px;
+  color: var(--color-black);
+}
+
+.service-card p {
+  color: var(--color-gray);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.service-card a {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: 0.25rem;
+  color: var(--color-black);
+  font-size: 0.92rem;
+  font-weight: 900;
+}
+
+.service-card a::after {
+  content: "›";
+  margin-left: 0.45rem;
+  color: var(--color-yellow-dark);
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: transform var(--transition-base);
+}
+
+.service-card a:hover::after {
+  transform: translateX(4px);
+}
+
+.service-card:hover .service-card__number,
+.service-card:hover h3,
+.service-card:hover a,
+.service-card--highlight .service-card__number,
+.service-card--highlight h3,
+.service-card--highlight a {
+  color: var(--color-white);
+}
+
+.service-card:hover p,
+.service-card--highlight p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.service-card:hover a::after,
+.service-card--highlight a::after {
+  color: var(--color-yellow);
+}
+
+.service-card--highlight {
+  background: var(--color-black);
+  border-color: var(--color-black);
+}
+
+@media (min-width: 640px) {
+  .home-services__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.15rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-services__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .service-card {
+    min-height: 320px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card,
+  .service-card::before,
+  .service-card a::after {
+    transition: none;
+  }
+
+  .service-card:hover {
+    transform: none;
+  }
+}
+
+.home-services .section-header {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+@media (max-width: 640px) {
+  .home-services {
+    padding-top: 2.75rem;
   }
 }
