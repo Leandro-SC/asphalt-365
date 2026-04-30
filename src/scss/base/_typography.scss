@@ -1,0 +1,57 @@
+body {
+  font-family: var(--font-primary);
+  color: var(--color-asphalt);
+  background: var(--color-white);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: inherit;
+}
+
+h1 {
+  font-size: clamp(3rem, 9vw, 6.75rem);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(2.25rem, 5vw, 4.5rem);
+  font-weight: 800;
+}
+
+h3 {
+  font-size: clamp(1.35rem, 2.5vw, 2rem);
+  font-weight: 750;
+}
+
+p {
+  color: var(--color-gray);
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+}
+
+.text-lead {
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  line-height: 1.65;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  color: var(--color-yellow);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 2.25rem;
+  height: 0.15rem;
+  background: currentColor;
+}

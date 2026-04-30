@@ -1,0 +1,25 @@
+:root {
+  --color-black: #080808;
+  --color-asphalt: #141414;
+  --color-dark-gray: #242424;
+  --color-gray: #6f6f6f;
+  --color-light-gray: #f4f4f4;
+  --color-white: #ffffff;
+  --color-yellow: #f5c400;
+  --color-yellow-dark: #d8a900;
+
+  --font-primary: "Inter", system-ui, sans-serif;
+
+  --container: 1180px;
+  --section-padding: clamp(4rem, 8vw, 7rem);
+
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+
+  --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.14);
+  --shadow-card: 0 16px 40px rgba(0, 0, 0, 0.1);
+
+  --transition-fast: 180ms ease;
+  --transition-base: 260ms ease;
+}

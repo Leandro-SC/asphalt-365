@@ -1,10 +1,11 @@
 {
   "name": "asphalt-365",
   "version": "1.0.0",
-  "description": "",
+  "description": "Premium static website for Asphalt 365 in St Charles, Illinois.",
   "main": "gulpfile.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+ "scripts": {
+    "dev": "gulp",
+    "build": "gulp build"
   },
   "keywords": [],
   "author": "",
@@ -21,5 +22,9 @@
     "gulp-sass": "^6.0.1",
     "gulp-terser": "^2.1.0",
     "sass": "^1.99.0"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "sweetalert2": "^11.26.24"
   }
 }

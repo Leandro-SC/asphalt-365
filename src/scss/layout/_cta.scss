@@ -1,0 +1,49 @@
+.final-cta {
+  position: relative;
+  overflow: hidden;
+}
+
+.final-cta::before {
+  content: "";
+  position: absolute;
+  inset: auto -10% -40% auto;
+  width: 28rem;
+  height: 28rem;
+  background: radial-gradient(circle, rgba(245, 196, 0, 0.22), transparent 68%);
+  pointer-events: none;
+}
+
+.final-cta__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.final-cta h2 {
+  max-width: 760px;
+  margin-top: 0.85rem;
+}
+
+.final-cta p {
+  max-width: 620px;
+  margin-top: 1rem;
+}
+
+.final-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  justify-content: flex-end;
+}
+
+@media (max-width: 760px) {
+  .final-cta__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .final-cta__actions {
+    justify-content: flex-start;
+  }
+}
