@@ -40,6 +40,9 @@
 
 <body>
   @@include('./partials/header.html')
+  <div class="floating-translate" aria-label="Translate website">
+  <div class="gtranslate_wrapper"></div>
+</div>
 
   <main id="main">
     <!--------------About Hero---------->
@@ -73,8 +76,8 @@
               Get a Free Estimate
             </a>
 
-            <a class="btn btn-outline btn-mobile-full" href="tel:+16304407586">
-              Call 630-440-7586
+            <a class="btn btn-outline btn-mobile-full" href="tel:+12247623594">
+              Call 224 762-3594
             </a>
           </div>
 
@@ -316,7 +319,7 @@
       "@type": "LocalBusiness",
       "@id": "https://asphalt365.com/#localbusiness",
       "name": "Asphalt 365",
-      "telephone": "+1-630-440-7586",
+      "telephone": "1-224-762-3594",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "St Charles",
@@ -356,6 +359,16 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script>
+  window.gtranslateSettings = {
+    "default_language": "en",
+    "languages": ["en", "es"],
+    "wrapper_selector": ".gtranslate_wrapper",
+    "flag_size": 24,
+    "switcher_horizontal_position": "inline"
+  };
+</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/popup.js" defer></script>
   <script src="js/app.min.js" defer></script>
 </body>
 

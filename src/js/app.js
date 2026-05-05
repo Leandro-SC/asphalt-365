@@ -601,6 +601,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateSlides();
 });
 
+
 document.addEventListener("DOMContentLoaded", () => {
   const videoShowcase = document.querySelector("[data-video-showcase]");
 
@@ -609,80 +610,152 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const player = videoShowcase.querySelector("[data-video-feature]");
-  const webmSource = videoShowcase.querySelector("[data-video-feature-webm]");
-  const mp4Source = videoShowcase.querySelector("[data-video-feature-mp4]");
+  const sourceWebm = videoShowcase.querySelector("[data-video-feature-webm]");
+  const sourceMp4 = videoShowcase.querySelector("[data-video-feature-mp4]");
+  const playButton = videoShowcase.querySelector("[data-video-feature-toggle]");
+  const fallback = videoShowcase.querySelector("[data-video-feature-fallback]");
+
   const title = videoShowcase.querySelector("[data-video-feature-title]");
   const text = videoShowcase.querySelector("[data-video-feature-text]");
   const badge = videoShowcase.querySelector("[data-video-feature-badge]");
   const items = Array.from(videoShowcase.querySelectorAll("[data-video-item]"));
 
-  if (!player || !webmSource || !mp4Source || !items.length) {
+  if (!player || !playButton) {
     return;
   }
 
-  const setActiveVideo = (item) => {
-    const webm = item.dataset.videoWebm;
-    const mp4 = item.dataset.videoMp4;
-    const poster = item.dataset.videoPoster;
-    const nextTitle = item.dataset.videoTitle;
-    const nextText = item.dataset.videoText;
-    const nextBadge = item.dataset.videoBadge;
+  const playText = playButton.querySelector(".video-feature__play-text");
 
-    if (!webm || !mp4) {
-      return;
-    }
-
-    items.forEach((button) => {
-      button.classList.toggle("is-active", button === item);
-    });
-
-    player.pause();
-
-    webmSource.setAttribute("src", webm);
-    mp4Source.setAttribute("src", mp4);
-
-    if (poster) {
-      player.setAttribute("poster", poster);
-    }
-
-    if (title && nextTitle) {
-      title.textContent = nextTitle;
-    }
-
-    if (text && nextText) {
-      text.textContent = nextText;
-    }
-
-    if (badge && nextBadge) {
-      badge.textContent = nextBadge;
-    }
-
-    player.load();
-
-    const playPromise = player.play();
-
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // El navegador puede bloquear autoplay con sonido.
-        // El usuario todavía puede presionar Play manualmente.
-      });
-    }
-
-    const isDesktop = window.matchMedia("(min-width: 1100px)").matches;
-
-    if (!isDesktop) {
-      videoShowcase.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
+  const showFallback = () => {
+    if (fallback) {
+      fallback.hidden = false;
     }
   };
 
+  const hideFallback = () => {
+    if (fallback) {
+      fallback.hidden = true;
+    }
+  };
+
+  const updatePlayButton = () => {
+    const isPlaying = !player.paused && !player.ended;
+
+    playButton.classList.toggle("is-playing", isPlaying);
+    playButton.setAttribute(
+      "aria-label",
+      isPlaying ? "Pause featured asphalt work video" : "Play featured asphalt work video"
+    );
+
+    if (playText) {
+      playText.textContent = isPlaying ? "Pause Video" : "Play Video";
+    }
+  };
+
+  const playVideo = async () => {
+    hideFallback();
+
+    try {
+      player.muted = false;
+      await player.play();
+    } catch (error) {
+      try {
+        player.muted = true;
+        await player.play();
+      } catch (secondError) {
+        player.setAttribute("controls", "controls");
+        showFallback();
+      }
+    }
+
+    updatePlayButton();
+  };
+
+  const pauseVideo = () => {
+    player.pause();
+    updatePlayButton();
+  };
+
+  playButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (player.paused || player.ended) {
+      playVideo();
+    } else {
+      pauseVideo();
+    }
+  });
+
+  player.addEventListener("click", () => {
+    if (player.paused || player.ended) {
+      playVideo();
+    } else {
+      pauseVideo();
+    }
+  });
+
+  player.addEventListener("play", updatePlayButton);
+  player.addEventListener("pause", updatePlayButton);
+  player.addEventListener("ended", updatePlayButton);
+
+  player.addEventListener("loadeddata", () => {
+    hideFallback();
+  });
+
+  player.addEventListener("error", () => {
+    showFallback();
+    updatePlayButton();
+  });
+
   items.forEach((item) => {
     item.addEventListener("click", () => {
-      setActiveVideo(item);
+      const webm = item.dataset.videoWebm || "";
+      const mp4 = item.dataset.videoMp4 || "";
+      const poster = item.dataset.videoPoster || "";
+      const nextTitle = item.dataset.videoTitle || "";
+      const nextText = item.dataset.videoText || "";
+      const nextBadge = item.dataset.videoBadge || "Project Video";
+
+      player.pause();
+      hideFallback();
+
+      if (sourceWebm) {
+        sourceWebm.src = webm;
+      }
+
+      if (sourceMp4) {
+        sourceMp4.src = mp4;
+      }
+
+      if (poster) {
+        player.poster = poster;
+      }
+
+      if (title) {
+        title.textContent = nextTitle;
+      }
+
+      if (text) {
+        text.textContent = nextText;
+      }
+
+      if (badge) {
+        badge.textContent = nextBadge;
+      }
+
+      items.forEach((button) => {
+        const isActive = button === item;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+
+      player.load();
+      updatePlayButton();
     });
   });
+
+  updatePlayButton();
 });
 
 document.addEventListener("DOMContentLoaded", () => {

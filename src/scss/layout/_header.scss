@@ -407,3 +407,164 @@
     display: none;
   }
 }
+
+.header__logo img,
+.logo img,
+.site-logo img,
+.navbar__logo img {
+  width: clamp(150px, 14vw, 210px);
+  height: auto;
+}
+
+@media (max-width: 640px) {
+  .header__logo {
+    max-width: 145px;
+  }
+}
+
+.header__container,
+.header__inner {
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.header__nav {
+  min-width: 0;
+}
+
+/****************Floating Translator******************/
+/****************Floating Translator Premium******************/
+.floating-translate {
+  position: fixed;
+  top: 7.25rem;
+  right: clamp(0.85rem, 2vw, 1.35rem);
+  z-index: 9999;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 3.35rem;
+  padding: 0.35rem 0.55rem 0.35rem 0.9rem;
+  color: var(--color-black);
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(8, 8, 8, 0.1);
+  border-radius: 999px;
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.22);
+  transform: none;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+.floating-translate::before {
+  content: "Translate";
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-black);
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.floating-translate::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  z-index: -1;
+  background: linear-gradient(135deg, rgba(245, 196, 0, 0.9), rgba(255, 255, 255, 0));
+  border-radius: inherit;
+  opacity: 0.9;
+}
+
+.floating-translate .gtranslate_wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-translate .gt_switcher_wrapper,
+.floating-translate .gt_switcher {
+  position: static !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit !important;
+}
+
+.floating-translate select,
+.floating-translate .gt_selector {
+  width: 2.7rem;
+  min-width: 2.7rem;
+  height: 2.7rem;
+  padding: 0;
+  color: transparent;
+  background:
+    linear-gradient(var(--color-yellow), var(--color-yellow)),
+    url("data:image/svg+xml,%3Csvg width='22' height='22' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z' stroke='%23080808' stroke-width='2'/%3E%3Cpath d='M2 12H22' stroke='%23080808' stroke-width='2'/%3E%3Cpath d='M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2Z' stroke='%23080808' stroke-width='2'/%3E%3C/svg%3E")
+    center / 1.3rem 1.3rem no-repeat;
+  border: 0;
+  border-radius: 50%;
+  font-size: 0;
+  font-family: inherit;
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base),
+    background var(--transition-base);
+}
+
+.floating-translate:hover select,
+.floating-translate:hover .gt_selector {
+  transform: scale(1.06);
+  box-shadow: 0 8px 24px rgba(245, 196, 0, 0.4);
+}
+
+.floating-translate select:focus,
+.floating-translate .gt_selector:focus {
+  box-shadow: 0 0 0 4px rgba(245, 196, 0, 0.26);
+}
+
+.floating-translate select option,
+.floating-translate .gt_selector option {
+  color: var(--color-black);
+  background: var(--color-white);
+  font-size: 0.9rem;
+}
+
+.floating-translate a {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.floating-translate img {
+  display: block;
+  width: 2rem !important;
+  height: 2rem !important;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.floating-translate {
+  top: 9.75rem !important;
+  bottom: auto !important;
+  transform: none !important;
+}
+
+@media (max-width: 760px) {
+  .floating-translate {
+    top: auto !important;
+    right: 0.85rem;
+    bottom: 5.25rem;
+    transform: none !important;
+  }
+}
+
+.floating-translate {
+  top: 13rem !important;
+  bottom: auto !important;
+  transform: none !important;
+}

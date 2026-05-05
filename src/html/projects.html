@@ -29,6 +29,9 @@
 
 <body>
   @@include('./partials/header.html')
+  <div class="floating-translate" aria-label="Translate website">
+  <div class="gtranslate_wrapper"></div>
+</div>
 
   <main id="main">
    <!--------------Projects Hero Premium---------->
@@ -353,8 +356,23 @@
             Your browser does not support the video tag.
           </video>
 
+          <button
+            class="video-feature__play"
+            type="button"
+            aria-label="Play featured asphalt work video"
+            data-video-feature-toggle
+          >
+            <span class="video-feature__play-icon" aria-hidden="true"></span>
+            <span class="video-feature__play-text">Play Video</span>
+          </button>
+
           <div class="video-feature__badge" aria-hidden="true">
             <span data-video-feature-badge>Featured Work</span>
+          </div>
+
+          <div class="video-feature__fallback" data-video-feature-fallback hidden>
+            <strong>Video unavailable</strong>
+            <span>Please choose another project video or try again later.</span>
           </div>
         </div>
 
@@ -383,84 +401,349 @@
         </div>
 
         <div class="video-playlist">
-          <button class="video-playlist-card is-active" type="button" data-video-item data-video-webm="videos/Video%2015.webm" data-video-mp4="videos/Video%2015.mp4" data-video-poster="images/Imagen%2015.jpg" data-video-title="Professional Asphalt Paving in Progress" data-video-text="A closer look at Asphalt 365’s jobsite process, surface preparation, equipment work and finished asphalt results." data-video-badge="Featured Work">
+          <button
+            class="video-playlist-card is-active"
+            type="button"
+            data-video-item
+            data-video-webm="videos/Video%2015.webm"
+            data-video-mp4="videos/Video%2015.mp4"
+            data-video-poster="images/Imagen%2015.jpg"
+            data-video-title="Professional Asphalt Paving in Progress"
+            data-video-text="A closer look at Asphalt 365’s jobsite process, surface preparation, equipment work and finished asphalt results."
+            data-video-badge="Featured Work"
+            aria-pressed="true"
+          >
             <span class="video-playlist-card__media">
               <img src="images/Imagen%2015.jpg" alt="" loading="lazy" decoding="async">
+              <span class="video-playlist-card__play" aria-hidden="true"></span>
             </span>
+
             <span class="video-playlist-card__content">
               <span>Video 15</span>
               <strong>Featured Paving Work</strong>
             </span>
           </button>
 
-          <button class="video-playlist-card" type="button" data-video-item data-video-webm="videos/Video%201.webm" data-video-mp4="videos/Video%201.mp4" data-video-poster="images/Imagen%201.jpg" data-video-title="Project Surface Work" data-video-text="A quick view of asphalt surface work and jobsite execution from a completed project." data-video-badge="Project Video">
-            <span class="video-playlist-card__media"><img src="images/Imagen%201.jpg" alt="" loading="lazy" decoding="async"></span>
-            <span class="video-playlist-card__content"><span>Video 01</span><strong>Project Surface Work</strong></span>
+          <button
+            class="video-playlist-card"
+            type="button"
+            data-video-item
+            data-video-webm="videos/Video%201.webm"
+            data-video-mp4="videos/Video%201.mp4"
+            data-video-poster="images/Imagen%201.jpg"
+            data-video-title="Project Surface Work"
+            data-video-text="A quick view of asphalt surface work and jobsite execution from a completed project."
+            data-video-badge="Project Video"
+            aria-pressed="false"
+          >
+            <span class="video-playlist-card__media">
+              <img src="images/Imagen%201.jpg" alt="" loading="lazy" decoding="async">
+              <span class="video-playlist-card__play" aria-hidden="true"></span>
+            </span>
+
+            <span class="video-playlist-card__content">
+              <span>Video 01</span>
+              <strong>Project Surface Work</strong>
+            </span>
           </button>
 
-          <button class="video-playlist-card" type="button" data-video-item data-video-webm="videos/Video%202.webm" data-video-mp4="videos/Video%202.mp4" data-video-poster="images/Imagen%202.jpg" data-video-title="Asphalt Crew Detail" data-video-text="See crew details and asphalt work in progress from a local project." data-video-badge="Crew Detail">
-            <span class="video-playlist-card__media"><img src="images/Imagen%202.jpg" alt="" loading="lazy" decoding="async"></span>
-            <span class="video-playlist-card__content"><span>Video 02</span><strong>Asphalt Crew Detail</strong></span>
+          <button
+            class="video-playlist-card"
+            type="button"
+            data-video-item
+            data-video-webm="videos/Video%202.webm"
+            data-video-mp4="videos/Video%202.mp4"
+            data-video-poster="images/Imagen%202.jpg"
+            data-video-title="Asphalt Crew Detail"
+            data-video-text="See crew details and asphalt work in progress from a local project."
+            data-video-badge="Crew Detail"
+            aria-pressed="false"
+          >
+            <span class="video-playlist-card__media">
+              <img src="images/Imagen%202.jpg" alt="" loading="lazy" decoding="async">
+              <span class="video-playlist-card__play" aria-hidden="true"></span>
+            </span>
+
+            <span class="video-playlist-card__content">
+              <span>Video 02</span>
+              <strong>Asphalt Crew Detail</strong>
+            </span>
           </button>
 
-          <button class="video-playlist-card" type="button" data-video-item data-video-webm="videos/Video%203.webm" data-video-mp4="videos/Video%203.mp4" data-video-poster="images/Imagen%203.jpg" data-video-title="Paving Process" data-video-text="A short video showing Asphalt 365 paving work and surface progress." data-video-badge="Process">
-            <span class="video-playlist-card__media"><img src="images/Imagen%203.jpg" alt="" loading="lazy" decoding="async"></span>
-            <span class="video-playlist-card__content"><span>Video 03</span><strong>Paving Process</strong></span>
+          <button
+            class="video-playlist-card"
+            type="button"
+            data-video-item
+            data-video-webm="videos/Video%203.webm"
+            data-video-mp4="videos/Video%203.mp4"
+            data-video-poster="images/Imagen%203.jpg"
+            data-video-title="Paving Process"
+            data-video-text="A short video showing Asphalt 365 paving work and surface progress."
+            data-video-badge="Process"
+            aria-pressed="false"
+          >
+            <span class="video-playlist-card__media">
+              <img src="images/Imagen%203.jpg" alt="" loading="lazy" decoding="async">
+              <span class="video-playlist-card__play" aria-hidden="true"></span>
+            </span>
+
+            <span class="video-playlist-card__content">
+              <span>Video 03</span>
+              <strong>Paving Process</strong>
+            </span>
           </button>
 
-          <button class="video-playlist-card" type="button" data-video-item data-video-webm="videos/Video%204.webm" data-video-mp4="videos/Video%204.mp4" data-video-poster="images/Imagen%204.jpg" data-video-title="Finished Asphalt Look" data-video-text="A project video focused on the finished asphalt look and jobsite quality." data-video-badge="Finished Work">
-            <span class="video-playlist-card__media"><img src="images/Imagen%204.jpg" alt="" loading="lazy" decoding="async"></span>
-            <span class="video-playlist-card__content"><span>Video 04</span><strong>Finished Asphalt Look</strong></span>
+          <button
+            class="video-playlist-card"
+            type="button"
+            data-video-item
+            data-video-webm="videos/Video%204.webm"
+            data-video-mp4="videos/Video%204.mp4"
+            data-video-poster="images/Imagen%204.jpg"
+            data-video-title="Finished Asphalt Look"
+            data-video-text="A project video focused on the finished asphalt look and jobsite quality."
+            data-video-badge="Finished Work"
+            aria-pressed="false"
+          >
+            <span class="video-playlist-card__media">
+              <img src="images/Imagen%204.jpg" alt="" loading="lazy" decoding="async">
+              <span class="video-playlist-card__play" aria-hidden="true"></span>
+            </span>
+
+            <span class="video-playlist-card__content">
+              <span>Video 04</span>
+              <strong>Finished Asphalt Look</strong>
+            </span>
           </button>
 
-          <button class="video-playlist-card" type="button" data-video-item data-video-webm="videos/Video%205.webm" data-video-mp4="videos/Video%205.mp4" data-video-poster="images/Imagen%205.jpg" data-video-title="Driveway Work" data-video-text="Residential asphalt work showing driveway improvement and surface detail." data-video-badge="Driveway">
-            <span class="video-playlist-card__media"><img src="images/Imagen%205.jpg" alt="" loading="lazy" decoding="async"></span>
-            <span class="video-playlist-card__content"><span>Video 05</span><strong>Driveway Work</strong></span>
+          <button
+            class="video-playlist-card"
+            type="button"
+            data-video-item
+            data-video-webm="videos/Video%205.webm"
+            data-video-mp4="videos/Video%205.mp4"
+            data-video-poster="images/Imagen%205.jpg"
+            data-video-title="Driveway Work"
+            data-video-text="Residential asphalt work showing driveway improvement and surface detail."
+            data-video-badge="Driveway"
+            aria-pressed="false"
+          >
+            <span class="video-playlist-card__media">
+              <img src="images/Imagen%205.jpg" alt="" loading="lazy" decoding="async">
+              <span class="video-playlist-card__play" aria-hidden="true"></span>
+            </span>
+
+            <span class="video-playlist-card__content">
+              <span>Video 05</span>
+              <strong>Driveway Work</strong>
+            </span>
           </button>
 
-          <button class="video-playlist-card" type="button" data-video-item data-video-webm="videos/Video%206.webm" data-video-mp4="videos/Video%206.mp4" data-video-poster="images/Imagen%206.jpg" data-video-title="Overlay Work" data-video-text="Asphalt overlay work designed to renew an existing paved surface." data-video-badge="Overlay">
-            <span class="video-playlist-card__media"><img src="images/Imagen%206.jpg" alt="" loading="lazy" decoding="async"></span>
-            <span class="video-playlist-card__content"><span>Video 06</span><strong>Overlay Work</strong></span>
+          <button
+            class="video-playlist-card"
+            type="button"
+            data-video-item
+            data-video-webm="videos/Video%206.webm"
+            data-video-mp4="videos/Video%206.mp4"
+            data-video-poster="images/Imagen%206.jpg"
+            data-video-title="Overlay Work"
+            data-video-text="Asphalt overlay work designed to renew an existing paved surface."
+            data-video-badge="Overlay"
+            aria-pressed="false"
+          >
+            <span class="video-playlist-card__media">
+              <img src="images/Imagen%206.jpg" alt="" loading="lazy" decoding="async">
+              <span class="video-playlist-card__play" aria-hidden="true"></span>
+            </span>
+
+            <span class="video-playlist-card__content">
+              <span>Video 06</span>
+              <strong>Overlay Work</strong>
+            </span>
           </button>
 
-          <button class="video-playlist-card" type="button" data-video-item data-video-webm="videos/Video%207.webm" data-video-mp4="videos/Video%207.mp4" data-video-poster="images/Imagen%207.jpg" data-video-title="Surface Prep" data-video-text="A look at preparation and asphalt workflow before the finished surface." data-video-badge="Preparation">
-            <span class="video-playlist-card__media"><img src="images/Imagen%207.jpg" alt="" loading="lazy" decoding="async"></span>
-            <span class="video-playlist-card__content"><span>Video 07</span><strong>Surface Prep</strong></span>
+          <button
+            class="video-playlist-card"
+            type="button"
+            data-video-item
+            data-video-webm="videos/Video%207.webm"
+            data-video-mp4="videos/Video%207.mp4"
+            data-video-poster="images/Imagen%207.jpg"
+            data-video-title="Surface Prep"
+            data-video-text="A look at preparation and asphalt workflow before the finished surface."
+            data-video-badge="Preparation"
+            aria-pressed="false"
+          >
+            <span class="video-playlist-card__media">
+              <img src="images/Imagen%207.jpg" alt="" loading="lazy" decoding="async">
+              <span class="video-playlist-card__play" aria-hidden="true"></span>
+            </span>
+
+            <span class="video-playlist-card__content">
+              <span>Video 07</span>
+              <strong>Surface Prep</strong>
+            </span>
           </button>
 
-          <button class="video-playlist-card" type="button" data-video-item data-video-webm="videos/Video%208.webm" data-video-mp4="videos/Video%208.mp4" data-video-poster="images/Imagen%208.jpg" data-video-title="Driveway Finish" data-video-text="Finished driveway paving with clean surface quality and curb appeal." data-video-badge="Residential">
-            <span class="video-playlist-card__media"><img src="images/Imagen%208.jpg" alt="" loading="lazy" decoding="async"></span>
-            <span class="video-playlist-card__content"><span>Video 08</span><strong>Driveway Finish</strong></span>
+          <button
+            class="video-playlist-card"
+            type="button"
+            data-video-item
+            data-video-webm="videos/Video%208.webm"
+            data-video-mp4="videos/Video%208.mp4"
+            data-video-poster="images/Imagen%208.jpg"
+            data-video-title="Driveway Finish"
+            data-video-text="Finished driveway paving with clean surface quality and curb appeal."
+            data-video-badge="Residential"
+            aria-pressed="false"
+          >
+            <span class="video-playlist-card__media">
+              <img src="images/Imagen%208.jpg" alt="" loading="lazy" decoding="async">
+              <span class="video-playlist-card__play" aria-hidden="true"></span>
+            </span>
+
+            <span class="video-playlist-card__content">
+              <span>Video 08</span>
+              <strong>Driveway Finish</strong>
+            </span>
           </button>
 
-          <button class="video-playlist-card" type="button" data-video-item data-video-webm="videos/Video%209.webm" data-video-mp4="videos/Video%209.mp4" data-video-poster="images/Imagen%209.jpg" data-video-title="Replacement Work" data-video-text="Removal and replacement work for asphalt that needs a stronger new surface." data-video-badge="Replacement">
-            <span class="video-playlist-card__media"><img src="images/Imagen%209.jpg" alt="" loading="lazy" decoding="async"></span>
-            <span class="video-playlist-card__content"><span>Video 09</span><strong>Replacement Work</strong></span>
+          <button
+            class="video-playlist-card"
+            type="button"
+            data-video-item
+            data-video-webm="videos/Video%209.webm"
+            data-video-mp4="videos/Video%209.mp4"
+            data-video-poster="images/Imagen%209.jpg"
+            data-video-title="Replacement Work"
+            data-video-text="Removal and replacement work for asphalt that needs a stronger new surface."
+            data-video-badge="Replacement"
+            aria-pressed="false"
+          >
+            <span class="video-playlist-card__media">
+              <img src="images/Imagen%209.jpg" alt="" loading="lazy" decoding="async">
+              <span class="video-playlist-card__play" aria-hidden="true"></span>
+            </span>
+
+            <span class="video-playlist-card__content">
+              <span>Video 09</span>
+              <strong>Replacement Work</strong>
+            </span>
           </button>
 
-          <button class="video-playlist-card" type="button" data-video-item data-video-webm="videos/Video%2010.webm" data-video-mp4="videos/Video%2010.mp4" data-video-poster="images/Imagen%2010.jpg" data-video-title="Jobsite Detail" data-video-text="A close look at asphalt work details and jobsite progress." data-video-badge="Jobsite">
-            <span class="video-playlist-card__media"><img src="images/Imagen%2010.jpg" alt="" loading="lazy" decoding="async"></span>
-            <span class="video-playlist-card__content"><span>Video 10</span><strong>Jobsite Detail</strong></span>
+          <button
+            class="video-playlist-card"
+            type="button"
+            data-video-item
+            data-video-webm="videos/Video%2010.webm"
+            data-video-mp4="videos/Video%2010.mp4"
+            data-video-poster="images/Imagen%2010.jpg"
+            data-video-title="Jobsite Detail"
+            data-video-text="A close look at asphalt work details and jobsite progress."
+            data-video-badge="Jobsite"
+            aria-pressed="false"
+          >
+            <span class="video-playlist-card__media">
+              <img src="images/Imagen%2010.jpg" alt="" loading="lazy" decoding="async">
+              <span class="video-playlist-card__play" aria-hidden="true"></span>
+            </span>
+
+            <span class="video-playlist-card__content">
+              <span>Video 10</span>
+              <strong>Jobsite Detail</strong>
+            </span>
           </button>
 
-          <button class="video-playlist-card" type="button" data-video-item data-video-webm="videos/Video%2011.webm" data-video-mp4="videos/Video%2011.mp4" data-video-poster="images/Imagen%2011.jpg" data-video-title="Commercial Surface" data-video-text="Commercial asphalt work for a clean, professional property surface." data-video-badge="Commercial">
-            <span class="video-playlist-card__media"><img src="images/Imagen%2011.jpg" alt="" loading="lazy" decoding="async"></span>
-            <span class="video-playlist-card__content"><span>Video 11</span><strong>Commercial Surface</strong></span>
+          <button
+            class="video-playlist-card"
+            type="button"
+            data-video-item
+            data-video-webm="videos/Video%2011.webm"
+            data-video-mp4="videos/Video%2011.mp4"
+            data-video-poster="images/Imagen%2011.jpg"
+            data-video-title="Commercial Surface"
+            data-video-text="Commercial asphalt work for a clean, professional property surface."
+            data-video-badge="Commercial"
+            aria-pressed="false"
+          >
+            <span class="video-playlist-card__media">
+              <img src="images/Imagen%2011.jpg" alt="" loading="lazy" decoding="async">
+              <span class="video-playlist-card__play" aria-hidden="true"></span>
+            </span>
+
+            <span class="video-playlist-card__content">
+              <span>Video 11</span>
+              <strong>Commercial Surface</strong>
+            </span>
           </button>
 
-          <button class="video-playlist-card" type="button" data-video-item data-video-webm="videos/Video%2012.webm" data-video-mp4="videos/Video%2012.mp4" data-video-poster="images/Imagen%2012.jpg" data-video-title="Parking Lot Work" data-video-text="Parking lot asphalt work for improved usability, traffic flow and presentation." data-video-badge="Parking Lot">
-            <span class="video-playlist-card__media"><img src="images/Imagen%2012.jpg" alt="" loading="lazy" decoding="async"></span>
-            <span class="video-playlist-card__content"><span>Video 12</span><strong>Parking Lot Work</strong></span>
+          <button
+            class="video-playlist-card"
+            type="button"
+            data-video-item
+            data-video-webm="videos/Video%2012.webm"
+            data-video-mp4="videos/Video%2012.mp4"
+            data-video-poster="images/Imagen%2012.jpg"
+            data-video-title="Parking Lot Work"
+            data-video-text="Parking lot asphalt work for improved usability, traffic flow and presentation."
+            data-video-badge="Parking Lot"
+            aria-pressed="false"
+          >
+            <span class="video-playlist-card__media">
+              <img src="images/Imagen%2012.jpg" alt="" loading="lazy" decoding="async">
+              <span class="video-playlist-card__play" aria-hidden="true"></span>
+            </span>
+
+            <span class="video-playlist-card__content">
+              <span>Video 12</span>
+              <strong>Parking Lot Work</strong>
+            </span>
           </button>
 
-          <button class="video-playlist-card" type="button" data-video-item data-video-webm="videos/Video%2013.webm" data-video-mp4="videos/Video%2013.mp4" data-video-poster="images/Imagen%2013.jpg" data-video-title="Repair Work" data-video-text="Patch and repair work designed to improve asphalt safety and appearance." data-video-badge="Repair">
-            <span class="video-playlist-card__media"><img src="images/Imagen%2013.jpg" alt="" loading="lazy" decoding="async"></span>
-            <span class="video-playlist-card__content"><span>Video 13</span><strong>Repair Work</strong></span>
+          <button
+            class="video-playlist-card"
+            type="button"
+            data-video-item
+            data-video-webm="videos/Video%2013.webm"
+            data-video-mp4="videos/Video%2013.mp4"
+            data-video-poster="images/Imagen%2013.jpg"
+            data-video-title="Repair Work"
+            data-video-text="Patch and repair work designed to improve asphalt safety and appearance."
+            data-video-badge="Repair"
+            aria-pressed="false"
+          >
+            <span class="video-playlist-card__media">
+              <img src="images/Imagen%2013.jpg" alt="" loading="lazy" decoding="async">
+              <span class="video-playlist-card__play" aria-hidden="true"></span>
+            </span>
+
+            <span class="video-playlist-card__content">
+              <span>Video 13</span>
+              <strong>Repair Work</strong>
+            </span>
           </button>
 
-          <button class="video-playlist-card" type="button" data-video-item data-video-webm="videos/Video%2014.webm" data-video-mp4="videos/Video%2014.mp4" data-video-poster="images/Imagen%2014.jpg" data-video-title="Asphalt Finish" data-video-text="A finished asphalt surface showing clean details and completed project quality." data-video-badge="Finish">
-            <span class="video-playlist-card__media"><img src="images/Imagen%2014.jpg" alt="" loading="lazy" decoding="async"></span>
-            <span class="video-playlist-card__content"><span>Video 14</span><strong>Asphalt Finish</strong></span>
+          <button
+            class="video-playlist-card"
+            type="button"
+            data-video-item
+            data-video-webm="videos/Video%2014.webm"
+            data-video-mp4="videos/Video%2014.mp4"
+            data-video-poster="images/Imagen%2014.jpg"
+            data-video-title="Asphalt Finish"
+            data-video-text="A finished asphalt surface showing clean details and completed project quality."
+            data-video-badge="Finish"
+            aria-pressed="false"
+          >
+            <span class="video-playlist-card__media">
+              <img src="images/Imagen%2014.jpg" alt="" loading="lazy" decoding="async">
+              <span class="video-playlist-card__play" aria-hidden="true"></span>
+            </span>
+
+            <span class="video-playlist-card__content">
+              <span>Video 14</span>
+              <strong>Asphalt Finish</strong>
+            </span>
           </button>
         </div>
       </aside>
@@ -488,6 +771,16 @@
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script>
+  window.gtranslateSettings = {
+    "default_language": "en",
+    "languages": ["en", "es"],
+    "wrapper_selector": ".gtranslate_wrapper",
+    "flag_size": 24,
+    "switcher_horizontal_position": "inline"
+  };
+</script>
+<script src="https://cdn.gtranslate.net/widgets/latest/popup.js" defer></script>
   <script src="js/app.min.js" defer></script>
 </body>
 </html>

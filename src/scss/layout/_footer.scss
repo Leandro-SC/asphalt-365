@@ -182,3 +182,108 @@
     bottom: 5rem;
   }
 }
+
+/****************Footer Social Icons******************/
+.site-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1.35rem;
+}
+
+.site-footer__social-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.85rem;
+  height: 2.85rem;
+  color: var(--color-white);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  overflow: hidden;
+  transition:
+    transform var(--transition-base),
+    color var(--transition-base),
+    background var(--transition-base),
+    border-color var(--transition-base),
+    box-shadow var(--transition-base);
+}
+
+.site-footer__social-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-yellow);
+  border-radius: inherit;
+  transform: scale(0);
+  transition: transform var(--transition-base);
+}
+
+.site-footer__social-link svg,
+.site-footer__social-link img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.site-footer__social-link img {
+  object-fit: contain;
+  border-radius: 0.45rem;
+}
+
+.site-footer__social-link:hover {
+  color: var(--color-black);
+  border-color: var(--color-yellow);
+  box-shadow: 0 14px 38px rgba(245, 196, 0, 0.22);
+  transform: translateY(-3px);
+}
+
+.site-footer__social-link:hover::before {
+  transform: scale(1);
+}
+
+.site-footer__social-link:focus-visible {
+  outline: 3px solid var(--color-yellow);
+  outline-offset: 4px;
+}
+
+.site-footer__social-link--angi {
+  background: var(--color-white);
+  border-color: rgba(255, 255, 255, 0.24);
+}
+
+.site-footer__social-link--angi::before {
+  background: var(--color-yellow);
+}
+
+.site-footer__social-link--angi img {
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  .site-footer__social {
+    justify-content: flex-start;
+  }
+
+  .site-footer__social-link {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer__social-link,
+  .site-footer__social-link::before {
+    transition: none;
+  }
+
+  .site-footer__social-link:hover {
+    transform: none;
+  }
+}
