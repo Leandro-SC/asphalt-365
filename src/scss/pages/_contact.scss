@@ -532,3 +532,29 @@
     transform: none;
   }
 }
+
+.contact-form__honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/****************Honeypot Anti Bot******************/
+.contact-form .contact-form__honeypot,
+.contact-form input.contact-form__honeypot {
+  position: absolute !important;
+  left: -9999px !important;
+  top: auto !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  border: 0 !important;
+  pointer-events: none !important;
+  appearance: none !important;
+}

@@ -24,7 +24,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
   <link rel="stylesheet" href="css/app.css">
 </head>
 
@@ -58,19 +62,19 @@
       <span></span>
     </button>
 
-    <nav class="site-nav" aria-label="Primary navigation" data-nav>
-      <ul class="site-nav__list">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+  <nav class="site-nav" aria-label="Primary navigation" data-nav>
+  <ul class="site-nav__list">
+    <li><a class="site-nav__link" href="index.html">Home</a></li>
+    <li><a class="site-nav__link" href="about.html">About</a></li>
+    <li><a class="site-nav__link" href="services.html">Services</a></li>
+    <li><a class="site-nav__link" href="projects.html">Projects</a></li>
+    <li><a class="site-nav__link" href="contact.html">Contact</a></li>
+  </ul>
 
-      <a class="site-nav__cta" href="contact.html">
-        Free Estimates
-      </a>
-    </nav>
+  <a class="site-nav__cta" href="contact.html">
+    Free Estimates
+  </a>
+</nav>
   </div>
 </header>
 
@@ -126,172 +130,204 @@
     </section>
 
     <!--------------Contact Main---------->
-    <section class="section contact-main" aria-labelledby="contact-main-title">
-      <div class="container contact-main__grid">
-        <div class="contact-main__content" data-reveal>
-          <span class="eyebrow">Get Started</span>
+  <!--------------Contact Main---------->
+<section class="section contact-main" aria-labelledby="contact-main-title">
+  <div class="container contact-main__grid">
+    <div class="contact-main__content" data-reveal>
+      <span class="eyebrow">Get Started</span>
 
-          <h2 id="contact-main-title">
-            Send Your Project Details and We’ll Help You Move Forward.
-          </h2>
+      <h2 id="contact-main-title">
+        Send Your Project Details and We’ll Help You Move Forward.
+      </h2>
 
-          <p class="text-lead">
-            Whether you need a new driveway, commercial parking lot paving,
-            sealcoating, asphalt overlay or repair work, use the form to request
-            your free estimate.
-          </p>
+      <p class="text-lead">
+        Whether you need a new driveway, commercial parking lot paving,
+        sealcoating, asphalt overlay or repair work, use the form to request
+        your free estimate.
+      </p>
 
-          <div class="contact-main__cards">
-            <article class="contact-info-card">
-              <span class="contact-info-card__icon" aria-hidden="true">☎</span>
-              <div>
-                <h3>Call Asphalt 365</h3>
-                <a href="tel:+16304407586">630-440-7586</a>
-              </div>
-            </article>
-
-            <article class="contact-info-card">
-              <span class="contact-info-card__icon" aria-hidden="true">⌖</span>
-              <div>
-                <h3>Service Area</h3>
-                <p>St Charles, Kane County and the Chicago Area</p>
-              </div>
-            </article>
-
-            <article class="contact-info-card">
-              <span class="contact-info-card__icon" aria-hidden="true">✓</span>
-              <div>
-                <h3>Estimate Type</h3>
-                <p>Residential and commercial asphalt projects</p>
-              </div>
-            </article>
+      <div class="contact-main__cards">
+        <article class="contact-info-card">
+          <span class="contact-info-card__icon" aria-hidden="true">☎</span>
+          <div>
+            <h3>Call Asphalt 365</h3>
+            <a href="tel:+16304407586">630-440-7586</a>
           </div>
-        </div>
+        </article>
 
-        <div class="contact-form-card" id="contact-form" data-reveal>
-          <div class="contact-form-card__header">
-            <span>Free Estimate</span>
-            <h2>Tell Us About Your Asphalt Project</h2>
-            <p>
-              Complete the form below and our team will review your request.
-            </p>
+        <article class="contact-info-card">
+          <span class="contact-info-card__icon" aria-hidden="true">⌖</span>
+          <div>
+            <h3>Service Area</h3>
+            <p>St Charles, Kane County and the Chicago Area</p>
           </div>
+        </article>
 
-          <form class="contact-form" id="estimateForm" novalidate>
-            <div class="contact-form__group">
-              <label for="name">Full Name <span>*</span></label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                autocomplete="name"
-                placeholder="Your name"
-                required
-              >
-              <small class="contact-form__error" data-error-for="name"></small>
-            </div>
-
-            <div class="contact-form__row">
-              <div class="contact-form__group">
-                <label for="phone">Phone Number <span>*</span></label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  autocomplete="tel"
-                  placeholder="630-440-7586"
-                  required
-                >
-                <small class="contact-form__error" data-error-for="phone"></small>
-              </div>
-
-              <div class="contact-form__group">
-                <label for="email">Email Address <span>*</span></label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  autocomplete="email"
-                  placeholder="you@example.com"
-                  required
-                >
-                <small class="contact-form__error" data-error-for="email"></small>
-              </div>
-            </div>
-
-            <div class="contact-form__row">
-              <div class="contact-form__group">
-                <label for="service">Service Needed <span>*</span></label>
-                <select id="service" name="service" required>
-                  <option value="">Select a service</option>
-                  <option value="Asphalt Overlay">Asphalt Overlay</option>
-                  <option value="Removal & Replacement">Removal & Replacement</option>
-                  <option value="Sealcoating">Sealcoating</option>
-                  <option value="Patch & Crack Repair">Patch & Crack Repair</option>
-                  <option value="Parking Lot Paving">Parking Lot Paving</option>
-                  <option value="Driveway Paving">Driveway Paving</option>
-                  <option value="Not Sure Yet">Not Sure Yet</option>
-                </select>
-                <small class="contact-form__error" data-error-for="service"></small>
-              </div>
-
-              <div class="contact-form__group">
-                <label for="propertyType">Property Type <span>*</span></label>
-                <select id="propertyType" name="propertyType" required>
-                  <option value="">Select property type</option>
-                  <option value="Residential">Residential</option>
-                  <option value="Commercial">Commercial</option>
-                  <option value="Property Management">Property Management</option>
-                  <option value="Other">Other</option>
-                </select>
-                <small class="contact-form__error" data-error-for="propertyType"></small>
-              </div>
-            </div>
-
-            <div class="contact-form__group">
-              <label for="location">Project Location <span>*</span></label>
-              <input
-                type="text"
-                id="location"
-                name="location"
-                autocomplete="address-level2"
-                placeholder="City or address"
-                required
-              >
-              <small class="contact-form__error" data-error-for="location"></small>
-            </div>
-
-            <div class="contact-form__group">
-              <label for="message">Project Details <span>*</span></label>
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                placeholder="Tell us about the asphalt surface, issue, size, timeline or goals."
-                required
-              ></textarea>
-              <small class="contact-form__error" data-error-for="message"></small>
-            </div>
-
-            <label class="contact-form__checkbox">
-              <input type="checkbox" id="consent" name="consent" required>
-              <span>
-                I agree to be contacted by Asphalt 365 about my estimate request.
-              </span>
-            </label>
-            <small class="contact-form__error" data-error-for="consent"></small>
-
-            <button class="btn btn-primary contact-form__submit" type="submit">
-              Submit Free Estimate Request
-            </button>
-
-            <p class="contact-form__note">
-              Prefer to talk now? Call <a href="tel:+16304407586">630-440-7586</a>.
-            </p>
-          </form>
-        </div>
+        <article class="contact-info-card">
+          <span class="contact-info-card__icon" aria-hidden="true">✓</span>
+          <div>
+            <h3>Estimate Type</h3>
+            <p>Residential and commercial asphalt projects</p>
+          </div>
+        </article>
       </div>
-    </section>
+    </div>
+
+    <div class="contact-form-card" id="contact-form" data-reveal>
+      <div class="contact-form-card__header">
+        <span>Free Estimate</span>
+
+        <h2>
+          Tell Us About Your Asphalt Project
+        </h2>
+
+        <p>
+          Complete the form below and your request will be securely stored in our
+          Asphalt 365 lead sheet for review.
+        </p>
+      </div>
+
+      <form
+        class="contact-form"
+        id="estimateForm"
+        data-leads-endpoint="https://script.google.com/macros/s/AKfycbz06duWBAP2jZnpMvod-1DsxnhpgQALh61wGUU6FE3s98z-Pch0IHOT6d-yvYtYwOBb/exec"
+        novalidate
+      >
+        <!--------Anti-bot fields-------->
+        <input
+          type="text"
+          id="website"
+          name="website"
+          class="contact-form__honeypot"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+        >
+
+        <input
+          type="hidden"
+          id="formTs"
+          name="form_ts"
+          value=""
+        >
+
+        <!--------Lead fields-------->
+        <div class="contact-form__group">
+          <label for="name">Full Name <span>*</span></label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            autocomplete="name"
+            placeholder="Your name"
+            required
+          >
+          <small class="contact-form__error" data-error-for="name"></small>
+        </div>
+
+        <div class="contact-form__row">
+          <div class="contact-form__group">
+            <label for="phone">Phone Number <span>*</span></label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              autocomplete="tel"
+              inputmode="tel"
+              placeholder="630-440-7586"
+              required
+            >
+            <small class="contact-form__error" data-error-for="phone"></small>
+          </div>
+
+          <div class="contact-form__group">
+            <label for="email">Email Address <span>*</span></label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              inputmode="email"
+              placeholder="you@example.com"
+              required
+            >
+            <small class="contact-form__error" data-error-for="email"></small>
+          </div>
+        </div>
+
+        <div class="contact-form__row">
+          <div class="contact-form__group">
+            <label for="service">Service Needed <span>*</span></label>
+            <select id="service" name="service" required>
+              <option value="">Select a service</option>
+              <option value="Asphalt Overlay">Asphalt Overlay</option>
+              <option value="Removal & Replacement">Removal & Replacement</option>
+              <option value="Sealcoating">Sealcoating</option>
+              <option value="Patch & Crack Repair">Patch & Crack Repair</option>
+              <option value="Parking Lot Paving">Parking Lot Paving</option>
+              <option value="Driveway Paving">Driveway Paving</option>
+              <option value="Not Sure Yet">Not Sure Yet</option>
+            </select>
+            <small class="contact-form__error" data-error-for="service"></small>
+          </div>
+
+          <div class="contact-form__group">
+            <label for="propertyType">Property Type <span>*</span></label>
+            <select id="propertyType" name="propertyType" required>
+              <option value="">Select property type</option>
+              <option value="Residential">Residential</option>
+              <option value="Commercial">Commercial</option>
+              <option value="Property Management">Property Management</option>
+              <option value="Other">Other</option>
+            </select>
+            <small class="contact-form__error" data-error-for="propertyType"></small>
+          </div>
+        </div>
+
+        <div class="contact-form__group">
+          <label for="location">Project Location <span>*</span></label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            autocomplete="address-level2"
+            placeholder="City or address"
+            required
+          >
+          <small class="contact-form__error" data-error-for="location"></small>
+        </div>
+
+        <div class="contact-form__group">
+          <label for="message">Project Details <span>*</span></label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            placeholder="Tell us about the asphalt surface, issue, size, timeline or goals."
+            required
+          ></textarea>
+          <small class="contact-form__error" data-error-for="message"></small>
+        </div>
+
+        <label class="contact-form__checkbox">
+          <input type="checkbox" id="consent" name="consent" required>
+          <span>
+            I agree to be contacted by Asphalt 365 about my estimate request.
+          </span>
+        </label>
+        <small class="contact-form__error" data-error-for="consent"></small>
+
+        <button class="btn btn-primary contact-form__submit" type="submit">
+          Submit Free Estimate Request
+        </button>
+
+        <p class="contact-form__note">
+          Prefer to talk now? Call <a href="tel:+16304407586">630-440-7586</a>.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
 
     <!--------------Contact Benefits---------->
     <section class="section contact-benefits bg-light" aria-labelledby="contact-benefits-title">
@@ -408,6 +444,37 @@
     <a href="contact.html">Get a Free Estimate</a>
   </div>
 </footer>
+
+<a
+  class="whatsapp-float"
+  href="https://wa.me/16304407586?text=Hi%20Asphalt%20365%2C%20I%27d%20like%20to%20request%20a%20free%20estimate%20for%20an%20asphalt%20project."
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Chat with Asphalt 365 on WhatsApp"
+>
+  <svg
+    class="whatsapp-float__icon"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 32 32"
+    width="28"
+    height="28"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path
+      fill="currentColor"
+      d="M16.003 2.667c-7.364 0-13.334 5.97-13.334 13.333 0 2.352.614 4.647 1.78 6.67L2.667 29.333l6.837-1.793a13.28 13.28 0 0 0 6.499 1.66c7.363 0 13.333-5.97 13.333-13.333S23.366 2.667 16.003 2.667Z"
+    />
+    <path
+      fill="#fff"
+      d="M23.773 19.64c-.333-.167-1.973-.973-2.28-1.087-.307-.113-.533-.167-.76.167-.227.333-.873 1.087-1.073 1.307-.2.227-.393.253-.727.087-.333-.167-1.407-.52-2.68-1.653-.99-.88-1.66-1.967-1.853-2.3-.193-.333-.02-.513.147-.68.153-.147.333-.393.5-.587.167-.193.227-.333.34-.553.113-.227.053-.42-.027-.587-.08-.167-.76-1.833-1.04-2.513-.273-.66-.553-.567-.76-.58-.193-.007-.42-.007-.647-.007-.227 0-.587.087-.893.42-.307.333-1.173 1.147-1.173 2.8 0 1.653 1.2 3.247 1.367 3.473.167.227 2.36 3.607 5.72 5.053.8.347 1.42.553 1.907.707.8.253 1.533.22 2.113.133.647-.093 1.973-.807 2.253-1.587.28-.78.28-1.447.193-1.587-.08-.14-.307-.227-.64-.393Z"
+    />
+  </svg>
+
+  <span class="whatsapp-float__text">
+    Free Estimate
+  </span>
+</a>
 
   <script type="application/ld+json">
   {

@@ -1854,3 +1854,25 @@
     width: 100%;
   }
 }
+
+/****************Video Player Click Fix******************/
+.video-feature__media {
+  position: relative;
+}
+
+.video-feature__player,
+.video-feature__media video {
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.video-feature__media::before,
+.video-feature__media::after,
+.video-feature__badge {
+  pointer-events: none;
+}
+
+.video-feature__badge {
+  z-index: 3;
+}

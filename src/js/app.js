@@ -637,13 +637,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     player.pause();
-    player.removeAttribute("src");
 
-    webmSource.src = webm;
-    mp4Source.src = mp4;
+    webmSource.setAttribute("src", webm);
+    mp4Source.setAttribute("src", mp4);
 
     if (poster) {
-      player.poster = poster;
+      player.setAttribute("poster", poster);
     }
 
     if (title && nextTitle) {
@@ -660,12 +659,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     player.load();
 
-    if (window.gsap) {
-      gsap.fromTo(
-        ".video-feature",
-        { autoAlpha: 0.88, y: 10 },
-        { autoAlpha: 1, y: 0, duration: 0.45, ease: "power2.out" }
-      );
+    const playPromise = player.play();
+
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // El navegador puede bloquear autoplay con sonido.
+        // El usuario todavía puede presionar Play manualmente.
+      });
     }
 
     const isDesktop = window.matchMedia("(min-width: 1100px)").matches;
@@ -692,7 +692,12 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  const endpoint = form.dataset.leadsEndpoint;
+  const powDifficulty = 4;
+
   const fields = {
+    website: form.querySelector("#website"),
+    formTs: form.querySelector("#formTs"),
     name: form.querySelector("#name"),
     phone: form.querySelector("#phone"),
     email: form.querySelector("#email"),
@@ -702,6 +707,12 @@ document.addEventListener("DOMContentLoaded", () => {
     message: form.querySelector("#message"),
     consent: form.querySelector("#consent")
   };
+
+  const submitButton = form.querySelector(".contact-form__submit");
+
+  if (fields.formTs) {
+    fields.formTs.value = String(Date.now());
+  }
 
   const setError = (fieldName, message) => {
     const field = fields[fieldName];
@@ -727,6 +738,26 @@ document.addEventListener("DOMContentLoaded", () => {
     error.textContent = "";
   };
 
+  const showAlert = (options) => {
+    if (window.Swal) {
+      Swal.fire(options);
+      return;
+    }
+
+    alert(options.text || options.title || "Form message");
+  };
+
+  const setSubmitting = (isSubmitting) => {
+    if (!submitButton) {
+      return;
+    }
+
+    submitButton.disabled = isSubmitting;
+    submitButton.textContent = isSubmitting
+      ? "Verifying & Sending..."
+      : "Submit Free Estimate Request";
+  };
+
   const isValidEmail = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
@@ -739,7 +770,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const validateForm = () => {
     let isValid = true;
 
-    Object.keys(fields).forEach(clearError);
+    [
+      "name",
+      "phone",
+      "email",
+      "service",
+      "propertyType",
+      "location",
+      "message",
+      "consent"
+    ].forEach(clearError);
+
+    if (fields.website && fields.website.value.trim()) {
+      isValid = false;
+    }
 
     if (!fields.name.value.trim()) {
       setError("name", "Please enter your full name.");
@@ -793,62 +837,190 @@ document.addEventListener("DOMContentLoaded", () => {
     return isValid;
   };
 
+  const sha256Hex = async (text) => {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(text);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+    return hashArray
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("");
+  };
+
+  const generateProofOfWork = async (email) => {
+    const powTs = Date.now();
+    const prefix = "0".repeat(powDifficulty);
+    let nonce = 0;
+    let hash = "";
+
+    while (true) {
+      const nonceValue = String(nonce);
+      const base = `${email}|${powTs}|${nonceValue}`;
+      hash = await sha256Hex(base);
+
+      if (hash.startsWith(prefix)) {
+        return {
+          pow_ts: powTs,
+          pow_nonce: nonceValue,
+          pow_hash: hash,
+          pow_difficulty: powDifficulty
+        };
+      }
+
+      nonce += 1;
+    }
+  };
+
   Object.entries(fields).forEach(([fieldName, field]) => {
-    if (!field) {
+    if (!field || fieldName === "website" || fieldName === "formTs") {
       return;
     }
 
-    const eventName = field.type === "checkbox" || field.tagName === "SELECT" ? "change" : "input";
+    const eventName = field.type === "checkbox" || field.tagName === "SELECT"
+      ? "change"
+      : "input";
 
     field.addEventListener(eventName, () => {
       clearError(fieldName);
     });
   });
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     if (!validateForm()) {
-      if (window.Swal) {
-        Swal.fire({
-          icon: "error",
-          title: "Please check the form",
-          text: "Some required fields need your attention before submitting.",
-          confirmButtonText: "Review Form",
-          confirmButtonColor: "#f5c400"
-        });
-      }
+      showAlert({
+        icon: "error",
+        title: "Please check the form",
+        text: "Some required fields need your attention before submitting.",
+        confirmButtonText: "Review Form",
+        confirmButtonColor: "#f5c400"
+      });
 
       return;
     }
 
-    const formData = {
-      name: fields.name.value.trim(),
-      phone: fields.phone.value.trim(),
-      email: fields.email.value.trim(),
-      service: fields.service.value,
-      propertyType: fields.propertyType.value,
-      location: fields.location.value.trim(),
-      message: fields.message.value.trim()
-    };
+    if (!endpoint) {
+      showAlert({
+        icon: "error",
+        title: "Form endpoint missing",
+        text: "The Google Sheets endpoint has not been configured.",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#f5c400"
+      });
 
-    console.table(formData);
+      return;
+    }
 
-    if (window.Swal) {
-      Swal.fire({
+    try {
+      setSubmitting(true);
+
+      const email = fields.email.value.trim().toLowerCase();
+      const pow = await generateProofOfWork(email);
+
+      const payload = {
+        website: fields.website ? fields.website.value.trim() : "",
+        form_ts: fields.formTs ? Number(fields.formTs.value) : Date.now(),
+
+        name: fields.name.value.trim(),
+        phone: fields.phone.value.trim(),
+        email,
+        service: fields.service.value,
+        propertyType: fields.propertyType.value,
+        location: fields.location.value.trim(),
+        message: fields.message.value.trim(),
+        consent: fields.consent.checked ? "true" : "false",
+
+        ua: navigator.userAgent,
+        tz: Intl.DateTimeFormat().resolvedOptions().timeZone || "",
+        page_id: "contact",
+        page_url: window.location.href,
+
+        pow_ts: pow.pow_ts,
+        pow_nonce: pow.pow_nonce,
+        pow_hash: pow.pow_hash,
+        pow_difficulty: pow.pow_difficulty
+      };
+
+      await fetch(endpoint, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      showAlert({
         icon: "success",
-        title: "Estimate Request Ready",
+        title: "Estimate Request Sent",
         html: `
-          <p style="margin:0 0 10px;">Thank you, <strong>${formData.name}</strong>.</p>
-          <p style="margin:0;">Your asphalt estimate request has been validated successfully.</p>
+          <p style="margin:0 0 10px;">Thank you, <strong>${payload.name}</strong>.</p>
+          <p style="margin:0;">Your request has been submitted to Asphalt 365.</p>
         `,
         confirmButtonText: "Great",
         confirmButtonColor: "#f5c400"
       });
-    } else {
-      alert("Thank you. Your estimate request has been validated successfully.");
+
+      form.reset();
+
+      if (fields.formTs) {
+        fields.formTs.value = String(Date.now());
+      }
+
+    } catch (error) {
+      console.error("Lead submission error:", error);
+
+      showAlert({
+        icon: "error",
+        title: "Submission Error",
+        text: "Your request could not be submitted. Please call Asphalt 365 at 630-440-7586.",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#f5c400"
+      });
+
+    } finally {
+      setSubmitting(false);
+    }
+  });
+});
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const navLinks = document.querySelectorAll(".site-nav__link");
+
+  if (!navLinks.length) {
+    return;
+  }
+
+  const currentPath = window.location.pathname;
+  const currentPage = currentPath.split("/").pop() || "index.html";
+
+  navLinks.forEach((link) => {
+    const linkHref = link.getAttribute("href");
+
+    if (!linkHref) {
+      return;
     }
 
-    form.reset();
+    const linkPage = linkHref.split("/").pop();
+
+    const isHome =
+      currentPage === "" ||
+      currentPage === "index.html" ||
+      currentPath === "/";
+
+    const isActive =
+      linkPage === currentPage ||
+      (isHome && linkPage === "index.html");
+
+    link.classList.toggle("is-active", isActive);
+
+    if (isActive) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
   });
 });

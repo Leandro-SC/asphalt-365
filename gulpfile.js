@@ -199,14 +199,11 @@ function serve() {
   gulp.watch([paths.html, paths.partials], html);
   gulp.watch(paths.scss, styles);
   gulp.watch(paths.js, scripts);
-  gulp.watch(paths.images, images);
-
-  if (fs.existsSync("src/videos")) {
-    gulp.watch(paths.videos, videos);
-  }
 }
+
+const devBuild = gulp.series(html, styles, scripts, staticFiles);
 const build = gulp.series(html, styles, scripts, images, videos, staticFiles);
-const dev = gulp.series(build, serve);
+const dev = gulp.series(devBuild, serve);
 
 exports.html = html;
 exports.styles = styles;
@@ -214,4 +211,5 @@ exports.scripts = scripts;
 exports.images = images;
 exports.videos = videos;
 exports.build = build;
+exports.dev = dev;
 exports.default = dev;
