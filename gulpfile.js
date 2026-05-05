@@ -121,7 +121,7 @@ function videos(done) {
   const videoFiles = [];
 
   gulp
-    .src(paths.videos, { read: false })
+    .src(paths.videos, { read: false, allowEmpty: true })
     .on("data", (file) => {
       videoFiles.push(file.path);
     })
@@ -143,7 +143,6 @@ function videos(done) {
         const mp4Output = path.join(outputDir, `${fileName}.mp4`);
         const webmOutput = path.join(outputDir, `${fileName}.webm`);
 
-        // MP4 optimizado
         await new Promise((resolve, reject) => {
           ffmpeg(filePath)
             .videoCodec("libx264")
@@ -160,7 +159,6 @@ function videos(done) {
             .on("error", reject);
         });
 
-        // WEBM optimizado
         await new Promise((resolve, reject) => {
           ffmpeg(filePath)
             .videoCodec("libvpx-vp9")
@@ -179,7 +177,8 @@ function videos(done) {
       }
 
       done();
-    });
+    })
+    .on("error", done);
 }
 
 function staticFiles() {
@@ -201,9 +200,11 @@ function serve() {
   gulp.watch(paths.scss, styles);
   gulp.watch(paths.js, scripts);
   gulp.watch(paths.images, images);
-  gulp.watch(paths.videos, videos);
-}
 
+  if (fs.existsSync("src/videos")) {
+    gulp.watch(paths.videos, videos);
+  }
+}
 const build = gulp.series(html, styles, scripts, images, videos, staticFiles);
 const dev = gulp.series(build, serve);
 

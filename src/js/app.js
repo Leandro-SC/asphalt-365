@@ -62,6 +62,31 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCounter();
     };
 
+    const syncHeroVideos = (activeIndex = currentIndex) => {
+      slides.forEach((slide, index) => {
+        const video = slide.querySelector(".hero-slide__video");
+
+        if (!video) {
+          return;
+        }
+
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+
+        if (index === activeIndex) {
+          const playPromise = video.play();
+
+          if (playPromise !== undefined) {
+            playPromise.catch(() => {});
+          }
+        } else {
+          video.pause();
+          video.currentTime = 0;
+        }
+      });
+    };
+
     const goToSlide = (nextIndex) => {
       if (isAnimating || nextIndex === currentIndex) {
         return;
@@ -87,6 +112,8 @@ document.addEventListener("DOMContentLoaded", () => {
         gsap.set(nextImage, { scale: 1.08 });
       }
 
+      syncHeroVideos(nextIndex);
+
       const tl = gsap.timeline({
         defaults: {
           ease: "power3.out"
@@ -97,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           currentIndex = nextIndex;
           updateCounter();
+          syncHeroVideos(currentIndex);
           isAnimating = false;
         }
       });
@@ -234,10 +262,10 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
     setInitialState();
+    syncHeroVideos();
     startAutoplay();
   }
 });
-
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -267,4 +295,560 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     });
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const tiltCards = document.querySelectorAll("[data-tilt-card]");
+
+  if (!prefersReducedMotion && tiltCards.length) {
+    tiltCards.forEach((card) => {
+      card.addEventListener("pointermove", (event) => {
+        const rect = card.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        const rotateY = ((x / rect.width) - 0.5) * 6;
+        const rotateX = ((0.5 - y / rect.height)) * 6;
+
+        card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+      });
+
+      card.addEventListener("pointerleave", () => {
+        card.style.transform = "";
+      });
+    });
+  }
+
+  const testimonialCarousel = document.querySelector("[data-testimonial-carousel]");
+
+  if (testimonialCarousel) {
+    const track = testimonialCarousel.querySelector("[data-testimonial-track]");
+    const slides = Array.from(testimonialCarousel.querySelectorAll("[data-testimonial-slide]"));
+    const prevButton = document.querySelector("[data-testimonial-prev]");
+    const nextButton = document.querySelector("[data-testimonial-next]");
+    const dotsContainer = testimonialCarousel.querySelector("[data-testimonial-dots]");
+
+    let currentIndex = 0;
+    let autoplayId = null;
+    const autoplayDelay = 5200;
+
+    if (!track || !slides.length) {
+      return;
+    }
+
+    const getVisibleSlides = () => {
+      if (window.matchMedia("(min-width: 960px)").matches) {
+        return 3;
+      }
+
+      if (window.matchMedia("(min-width: 700px)").matches) {
+        return 2;
+      }
+
+      return 1;
+    };
+
+    const getMaxIndex = () => {
+      return Math.max(slides.length - getVisibleSlides(), 0);
+    };
+
+    const createDots = () => {
+      if (!dotsContainer) {
+        return;
+      }
+
+      dotsContainer.innerHTML = "";
+
+      for (let index = 0; index <= getMaxIndex(); index += 1) {
+        const dot = document.createElement("button");
+        dot.className = "testimonials__dot";
+        dot.type = "button";
+        dot.setAttribute("aria-label", `Go to testimonial ${index + 1}`);
+
+        dot.addEventListener("click", () => {
+          goToSlide(index);
+          restartAutoplay();
+        });
+
+        dotsContainer.appendChild(dot);
+      }
+    };
+
+    const updateDots = () => {
+      if (!dotsContainer) {
+        return;
+      }
+
+      const dots = dotsContainer.querySelectorAll(".testimonials__dot");
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle("is-active", index === currentIndex);
+      });
+    };
+
+    const updateCarousel = () => {
+      currentIndex = Math.min(currentIndex, getMaxIndex());
+
+      const firstSlide = slides[0];
+      const slideWidth = firstSlide.getBoundingClientRect().width;
+      const styles = window.getComputedStyle(track);
+      const gap = parseFloat(styles.columnGap || styles.gap || 0);
+      const offset = currentIndex * (slideWidth + gap);
+
+      if (window.gsap && !prefersReducedMotion) {
+        gsap.to(track, {
+          x: -offset,
+          duration: 0.7,
+          ease: "power3.out"
+        });
+      } else {
+        track.style.transform = `translateX(${-offset}px)`;
+      }
+
+      updateDots();
+    };
+
+    const goToSlide = (index) => {
+      const maxIndex = getMaxIndex();
+      currentIndex = Math.max(0, Math.min(index, maxIndex));
+      updateCarousel();
+    };
+
+    const nextSlide = () => {
+      const maxIndex = getMaxIndex();
+      currentIndex = currentIndex >= maxIndex ? 0 : currentIndex + 1;
+      updateCarousel();
+    };
+
+    const prevSlide = () => {
+      const maxIndex = getMaxIndex();
+      currentIndex = currentIndex <= 0 ? maxIndex : currentIndex - 1;
+      updateCarousel();
+    };
+
+    const stopAutoplay = () => {
+      if (autoplayId) {
+        clearInterval(autoplayId);
+        autoplayId = null;
+      }
+    };
+
+    const startAutoplay = () => {
+      stopAutoplay();
+
+      if (!prefersReducedMotion) {
+        autoplayId = setInterval(nextSlide, autoplayDelay);
+      }
+    };
+
+    const restartAutoplay = () => {
+      stopAutoplay();
+      startAutoplay();
+    };
+
+    if (nextButton) {
+      nextButton.addEventListener("click", () => {
+        nextSlide();
+        restartAutoplay();
+      });
+    }
+
+    if (prevButton) {
+      prevButton.addEventListener("click", () => {
+        prevSlide();
+        restartAutoplay();
+      });
+    }
+
+    testimonialCarousel.addEventListener("mouseenter", stopAutoplay);
+    testimonialCarousel.addEventListener("mouseleave", startAutoplay);
+    testimonialCarousel.addEventListener("focusin", stopAutoplay);
+    testimonialCarousel.addEventListener("focusout", startAutoplay);
+
+    window.addEventListener("resize", () => {
+      createDots();
+      updateCarousel();
+    });
+
+    createDots();
+    updateCarousel();
+    startAutoplay();
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const projectShowcase = document.querySelector("[data-project-showcase]");
+
+  if (!projectShowcase) {
+    return;
+  }
+
+  const track = projectShowcase.querySelector("[data-project-track]");
+  const slides = Array.from(projectShowcase.querySelectorAll("[data-project-slide]"));
+  const thumbs = Array.from(projectShowcase.querySelectorAll("[data-project-thumb]"));
+  const prevButton = projectShowcase.querySelector("[data-project-prev]");
+  const nextButton = projectShowcase.querySelector("[data-project-next]");
+  const currentCounter = projectShowcase.querySelector("[data-project-current]");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  let currentIndex = 0;
+
+  const formatNumber = (number) => String(number).padStart(2, "0");
+
+  const updateThumbs = () => {
+    thumbs.forEach((thumb, index) => {
+      thumb.classList.toggle("is-active", index === currentIndex);
+    });
+
+    const activeThumb = thumbs[currentIndex];
+
+    if (activeThumb) {
+      activeThumb.scrollIntoView({
+        behavior: prefersReducedMotion ? "auto" : "smooth",
+        block: "nearest",
+        inline: "nearest"
+      });
+    }
+  };
+
+  const updateSlides = () => {
+    slides.forEach((slide, index) => {
+      slide.classList.toggle("is-active", index === currentIndex);
+    });
+
+    const offset = currentIndex * 100;
+
+    if (window.gsap && !prefersReducedMotion) {
+      gsap.to(track, {
+        xPercent: -offset,
+        duration: 0.65,
+        ease: "power3.out"
+      });
+    } else {
+      track.style.transform = `translateX(-${offset}%)`;
+    }
+
+    if (currentCounter) {
+      currentCounter.textContent = formatNumber(currentIndex + 1);
+    }
+
+    updateThumbs();
+  };
+
+  const goToSlide = (index) => {
+    if (!slides.length) {
+      return;
+    }
+
+    currentIndex = (index + slides.length) % slides.length;
+    updateSlides();
+  };
+
+  if (prevButton) {
+    prevButton.addEventListener("click", () => {
+      goToSlide(currentIndex - 1);
+    });
+  }
+
+  if (nextButton) {
+    nextButton.addEventListener("click", () => {
+      goToSlide(currentIndex + 1);
+    });
+  }
+
+  thumbs.forEach((thumb) => {
+    thumb.addEventListener("click", () => {
+      const index = Number(thumb.dataset.projectThumb);
+      goToSlide(index);
+    });
+  });
+
+  projectShowcase.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft") {
+      goToSlide(currentIndex - 1);
+    }
+
+    if (event.key === "ArrowRight") {
+      goToSlide(currentIndex + 1);
+    }
+  });
+
+  let touchStartX = 0;
+
+  projectShowcase.addEventListener(
+    "touchstart",
+    (event) => {
+      touchStartX = event.changedTouches[0].clientX;
+    },
+    { passive: true }
+  );
+
+  projectShowcase.addEventListener(
+    "touchend",
+    (event) => {
+      const touchEndX = event.changedTouches[0].clientX;
+      const difference = touchStartX - touchEndX;
+
+      if (Math.abs(difference) > 50) {
+        goToSlide(difference > 0 ? currentIndex + 1 : currentIndex - 1);
+      }
+    },
+    { passive: true }
+  );
+
+  updateSlides();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const videoShowcase = document.querySelector("[data-video-showcase]");
+
+  if (!videoShowcase) {
+    return;
+  }
+
+  const player = videoShowcase.querySelector("[data-video-feature]");
+  const webmSource = videoShowcase.querySelector("[data-video-feature-webm]");
+  const mp4Source = videoShowcase.querySelector("[data-video-feature-mp4]");
+  const title = videoShowcase.querySelector("[data-video-feature-title]");
+  const text = videoShowcase.querySelector("[data-video-feature-text]");
+  const badge = videoShowcase.querySelector("[data-video-feature-badge]");
+  const items = Array.from(videoShowcase.querySelectorAll("[data-video-item]"));
+
+  if (!player || !webmSource || !mp4Source || !items.length) {
+    return;
+  }
+
+  const setActiveVideo = (item) => {
+    const webm = item.dataset.videoWebm;
+    const mp4 = item.dataset.videoMp4;
+    const poster = item.dataset.videoPoster;
+    const nextTitle = item.dataset.videoTitle;
+    const nextText = item.dataset.videoText;
+    const nextBadge = item.dataset.videoBadge;
+
+    if (!webm || !mp4) {
+      return;
+    }
+
+    items.forEach((button) => {
+      button.classList.toggle("is-active", button === item);
+    });
+
+    player.pause();
+    player.removeAttribute("src");
+
+    webmSource.src = webm;
+    mp4Source.src = mp4;
+
+    if (poster) {
+      player.poster = poster;
+    }
+
+    if (title && nextTitle) {
+      title.textContent = nextTitle;
+    }
+
+    if (text && nextText) {
+      text.textContent = nextText;
+    }
+
+    if (badge && nextBadge) {
+      badge.textContent = nextBadge;
+    }
+
+    player.load();
+
+    if (window.gsap) {
+      gsap.fromTo(
+        ".video-feature",
+        { autoAlpha: 0.88, y: 10 },
+        { autoAlpha: 1, y: 0, duration: 0.45, ease: "power2.out" }
+      );
+    }
+
+    const isDesktop = window.matchMedia("(min-width: 1100px)").matches;
+
+    if (!isDesktop) {
+      videoShowcase.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  };
+
+  items.forEach((item) => {
+    item.addEventListener("click", () => {
+      setActiveVideo(item);
+    });
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("#estimateForm");
+
+  if (!form) {
+    return;
+  }
+
+  const fields = {
+    name: form.querySelector("#name"),
+    phone: form.querySelector("#phone"),
+    email: form.querySelector("#email"),
+    service: form.querySelector("#service"),
+    propertyType: form.querySelector("#propertyType"),
+    location: form.querySelector("#location"),
+    message: form.querySelector("#message"),
+    consent: form.querySelector("#consent")
+  };
+
+  const setError = (fieldName, message) => {
+    const field = fields[fieldName];
+    const error = form.querySelector(`[data-error-for="${fieldName}"]`);
+
+    if (!field || !error) {
+      return;
+    }
+
+    field.classList.add("is-invalid");
+    error.textContent = message;
+  };
+
+  const clearError = (fieldName) => {
+    const field = fields[fieldName];
+    const error = form.querySelector(`[data-error-for="${fieldName}"]`);
+
+    if (!field || !error) {
+      return;
+    }
+
+    field.classList.remove("is-invalid");
+    error.textContent = "";
+  };
+
+  const isValidEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const isValidPhone = (phone) => {
+    const digits = phone.replace(/\D/g, "");
+    return digits.length >= 10;
+  };
+
+  const validateForm = () => {
+    let isValid = true;
+
+    Object.keys(fields).forEach(clearError);
+
+    if (!fields.name.value.trim()) {
+      setError("name", "Please enter your full name.");
+      isValid = false;
+    }
+
+    if (!fields.phone.value.trim()) {
+      setError("phone", "Please enter your phone number.");
+      isValid = false;
+    } else if (!isValidPhone(fields.phone.value.trim())) {
+      setError("phone", "Please enter a valid phone number.");
+      isValid = false;
+    }
+
+    if (!fields.email.value.trim()) {
+      setError("email", "Please enter your email address.");
+      isValid = false;
+    } else if (!isValidEmail(fields.email.value.trim())) {
+      setError("email", "Please enter a valid email address.");
+      isValid = false;
+    }
+
+    if (!fields.service.value) {
+      setError("service", "Please select a service.");
+      isValid = false;
+    }
+
+    if (!fields.propertyType.value) {
+      setError("propertyType", "Please select a property type.");
+      isValid = false;
+    }
+
+    if (!fields.location.value.trim()) {
+      setError("location", "Please enter the project location.");
+      isValid = false;
+    }
+
+    if (!fields.message.value.trim()) {
+      setError("message", "Please tell us about your project.");
+      isValid = false;
+    } else if (fields.message.value.trim().length < 12) {
+      setError("message", "Please add a few more details about your project.");
+      isValid = false;
+    }
+
+    if (!fields.consent.checked) {
+      setError("consent", "Please confirm that we may contact you about your estimate.");
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  Object.entries(fields).forEach(([fieldName, field]) => {
+    if (!field) {
+      return;
+    }
+
+    const eventName = field.type === "checkbox" || field.tagName === "SELECT" ? "change" : "input";
+
+    field.addEventListener(eventName, () => {
+      clearError(fieldName);
+    });
+  });
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (!validateForm()) {
+      if (window.Swal) {
+        Swal.fire({
+          icon: "error",
+          title: "Please check the form",
+          text: "Some required fields need your attention before submitting.",
+          confirmButtonText: "Review Form",
+          confirmButtonColor: "#f5c400"
+        });
+      }
+
+      return;
+    }
+
+    const formData = {
+      name: fields.name.value.trim(),
+      phone: fields.phone.value.trim(),
+      email: fields.email.value.trim(),
+      service: fields.service.value,
+      propertyType: fields.propertyType.value,
+      location: fields.location.value.trim(),
+      message: fields.message.value.trim()
+    };
+
+    console.table(formData);
+
+    if (window.Swal) {
+      Swal.fire({
+        icon: "success",
+        title: "Estimate Request Ready",
+        html: `
+          <p style="margin:0 0 10px;">Thank you, <strong>${formData.name}</strong>.</p>
+          <p style="margin:0;">Your asphalt estimate request has been validated successfully.</p>
+        `,
+        confirmButtonText: "Great",
+        confirmButtonColor: "#f5c400"
+      });
+    } else {
+      alert("Thank you. Your estimate request has been validated successfully.");
+    }
+
+    form.reset();
+  });
 });

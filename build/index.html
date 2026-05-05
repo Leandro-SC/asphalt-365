@@ -77,23 +77,25 @@
   <main id="main">
 
 <!--------------Sección Banner---------->    
-<section class="hero-carousel" aria-label="Featured asphalt services">
+<section class="hero-carousel hero-carousel--video" aria-label="Featured asphalt services">
   <div class="hero-carousel__viewport" data-hero-carousel>
 
     <!--------Banner 1-->
     <article class="hero-slide is-active" data-slide>
       <div class="hero-slide__media" aria-hidden="true">
-        <picture>
-          <source srcset="images/Parking Lot Paving.avif" type="image/avif">
-          <source srcset="images/Parking Lot Paving.webp" type="image/webp">
-          <img
-            class="hero-slide__image"
-            src="images/Parking Lot Paving.png"
-            alt="New asphalt driveway paving project in St Charles Illinois"
-            width="1920"
-            height="1080"
-          >
-        </picture>
+        <video
+          class="hero-slide__image hero-slide__video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="images/Parking Lot Paving.png"
+          tabindex="-1"
+        >
+          <source src="videos/Video 1.webm" type="video/webm">
+          <source src="videos/Video 1.mp4" type="video/mp4">
+        </video>
       </div>
 
       <div class="hero-slide__overlay" aria-hidden="true"></div>
@@ -123,29 +125,30 @@
             </a>
           </div>
 
-        <div class="hero-slide__trust" data-slide-item>
-  <span>Residential & Commercial</span>
-  <span>Free Estimates</span>
-</div>
+          <div class="hero-slide__trust" data-slide-item>
+            <span>Residential & Commercial</span>
+            <span>Free Estimates</span>
+          </div>
         </div>
       </div>
     </article>
-<!--------Banner 2-->
+
+    <!--------Banner 2-->
     <article class="hero-slide" data-slide>
       <div class="hero-slide__media" aria-hidden="true">
-        <picture>
-          <source srcset="images/Sealcoating.avif" type="image/avif">
-          <source srcset="images/Sealcoating.webp" type="image/webp">
-          <img
-            class="hero-slide__image"
-            src="images/Sealcoating.png"
-            alt="Commercial parking lot paving and asphalt overlay project"
-            width="1920"
-            height="1080"
-            loading="lazy"
-            decoding="async"
-          >
-        </picture>
+        <video
+          class="hero-slide__image hero-slide__video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="images/Sealcoating.png"
+          tabindex="-1"
+        >
+          <source src="videos/Video 2.webm" type="video/webm">
+          <source src="videos/Video 2.mp4" type="video/mp4">
+        </video>
       </div>
 
       <div class="hero-slide__overlay" aria-hidden="true"></div>
@@ -175,29 +178,30 @@
             </a>
           </div>
 
-      <div class="hero-slide__trust" data-slide-item>
-  <span>Overlay & Replacement</span>
-  <span>Chicago Area</span>
-</div>
+          <div class="hero-slide__trust" data-slide-item>
+            <span>Overlay & Replacement</span>
+            <span>Chicago Area</span>
+          </div>
         </div>
       </div>
     </article>
-<!--------Banner 3-->
+
+    <!--------Banner 3-->
     <article class="hero-slide" data-slide>
       <div class="hero-slide__media" aria-hidden="true">
-        <picture>
-          <source srcset="images/Asphalt Overlay.avif" type="image/avif">
-          <source srcset="images/Asphalt Overlay.webp" type="image/webp">
-          <img
-            class="hero-slide__image"
-            src="images/Asphalt Overlay.png"
-            alt="Sealcoating, crack repair and striping asphalt maintenance service"
-            width="1920"
-            height="1080"
-            loading="lazy"
-            decoding="async"
-          >
-        </picture>
+        <video
+          class="hero-slide__image hero-slide__video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+          poster="images/Asphalt Overlay.png"
+          tabindex="-1"
+        >
+          <source src="videos/Video 3.webm" type="video/webm">
+          <source src="videos/Video 3.mp4" type="video/mp4">
+        </video>
       </div>
 
       <div class="hero-slide__overlay" aria-hidden="true"></div>
@@ -227,10 +231,10 @@
             </a>
           </div>
 
-      <div class="hero-slide__trust" data-slide-item>
-  <span>Sealcoating</span>
-  <span>Crack Repair</span>
-</div>
+          <div class="hero-slide__trust" data-slide-item>
+            <span>Sealcoating</span>
+            <span>Crack Repair</span>
+          </div>
         </div>
       </div>
     </article>
@@ -266,7 +270,7 @@
 </section>
 
 <!--------------Sección Servicios---------->
-    <section class="section home-services" aria-labelledby="home-services-title">
+<section class="section home-services" aria-labelledby="home-services-title">
   <div class="container">
     <div class="section-header center" data-reveal>
       <span class="eyebrow">Our Services</span>
@@ -280,95 +284,610 @@
     </div>
 
     <div class="home-services__grid">
-      <article class="service-card" data-reveal>
-        <div class="service-card__number">01</div>
-        <div class="service-card__icon" aria-hidden="true">
-          <span></span>
-        </div>
-        <h3>Asphalt Overlay</h3>
-        <p>
-          Restore worn asphalt with a smooth, durable overlay designed to improve
-          appearance and extend surface life.
-        </p>
-        <a href="services.html" aria-label="Learn more about asphalt overlay">
-          Learn More
+      <article class="service-card service-card--overlay" data-reveal data-tilt-card>
+        <a class="service-card__link" href="services.html" aria-label="Learn more about asphalt overlay">
+          <div class="service-card__media">
+            <picture>
+              <source srcset="images/Imagen 6.avif" type="image/avif">
+              <source srcset="images/Imagen 6.webp" type="image/webp">
+              <img class="service-card__image" src="images/Imagen 6.jpg" alt="Fresh asphalt overlay service in St Charles Illinois" width="720" height="520" loading="lazy" decoding="async">
+            </picture>
+            <span class="service-card__number">01</span>
+          </div>
+
+          <div class="service-card__content">
+            <span class="service-card__eyebrow">Surface Renewal</span>
+            <h3>Asphalt Overlay</h3>
+            <p>
+              Restore worn asphalt with a smooth, durable overlay designed to improve
+              appearance and extend surface life.
+            </p>
+
+            <div class="service-card__footer">
+              <span class="service-card__meta">Ideal for aging pavement</span>
+              <span class="service-card__arrow" aria-hidden="true">↗</span>
+            </div>
+          </div>
         </a>
       </article>
 
-      <article class="service-card" data-reveal>
-        <div class="service-card__number">02</div>
-        <div class="service-card__icon" aria-hidden="true">
-          <span></span>
-        </div>
-        <h3>Removal & Replacement</h3>
-        <p>
-          Full asphalt removal and replacement for damaged surfaces that need a
-          stronger, cleaner and longer-lasting solution.
-        </p>
-        <a href="services.html" aria-label="Learn more about asphalt removal and replacement">
-          Learn More
+      <article class="service-card service-card--replacement" data-reveal data-tilt-card>
+        <a class="service-card__link" href="services.html" aria-label="Learn more about asphalt removal and replacement">
+          <div class="service-card__media">
+            <picture>
+              <source srcset="images/Imagen 9.avif" type="image/avif">
+              <source srcset="images/Imagen 9.webp" type="image/webp">
+              <img class="service-card__image" src="images/Imagen 9.jpg" alt="Asphalt removal and replacement work for damaged pavement" width="720" height="520" loading="lazy" decoding="async">
+            </picture>
+            <span class="service-card__number">02</span>
+          </div>
+
+          <div class="service-card__content">
+            <span class="service-card__eyebrow">Full Rebuild</span>
+            <h3>Removal & Replacement</h3>
+            <p>
+              Full asphalt removal and replacement for damaged surfaces that need a
+              stronger, cleaner and longer-lasting solution.
+            </p>
+
+            <div class="service-card__footer">
+              <span class="service-card__meta">Best for failed asphalt</span>
+              <span class="service-card__arrow" aria-hidden="true">↗</span>
+            </div>
+          </div>
         </a>
       </article>
 
-      <article class="service-card" data-reveal>
-        <div class="service-card__number">03</div>
-        <div class="service-card__icon" aria-hidden="true">
-          <span></span>
-        </div>
-        <h3>Sealcoating</h3>
-        <p>
-          Protect your asphalt from weather, wear and fading while improving the
-          finished look of your driveway or parking lot.
-        </p>
-        <a href="services.html" aria-label="Learn more about sealcoating">
-          Learn More
+      <article class="service-card service-card--sealcoating" data-reveal data-tilt-card>
+        <a class="service-card__link" href="services.html" aria-label="Learn more about sealcoating">
+          <div class="service-card__media">
+            <picture>
+              <source srcset="images/Imagen 18.avif" type="image/avif">
+              <source srcset="images/Imagen 18.webp" type="image/webp">
+              <img class="service-card__image" src="images/Imagen 18.jpg" alt="Fresh black asphalt sealcoating finish for driveway or parking lot" width="720" height="520" loading="lazy" decoding="async">
+            </picture>
+            <span class="service-card__number">03</span>
+          </div>
+
+          <div class="service-card__content">
+            <span class="service-card__eyebrow">Protection</span>
+            <h3>Sealcoating</h3>
+            <p>
+              Protect your asphalt from weather, wear and fading while improving the
+              finished look of your driveway or parking lot.
+            </p>
+
+            <div class="service-card__footer">
+              <span class="service-card__meta">Protects & refreshes</span>
+              <span class="service-card__arrow" aria-hidden="true">↗</span>
+            </div>
+          </div>
         </a>
       </article>
 
-      <article class="service-card" data-reveal>
-        <div class="service-card__number">04</div>
-        <div class="service-card__icon" aria-hidden="true">
-          <span></span>
-        </div>
-        <h3>Patch & Crack Repair</h3>
-        <p>
-          Fix cracks, potholes and damaged areas before they become larger,
-          costlier asphalt problems.
-        </p>
-        <a href="services.html" aria-label="Learn more about patch and crack repair">
-          Learn More
+      <article class="service-card service-card--repair" data-reveal data-tilt-card>
+        <a class="service-card__link" href="services.html" aria-label="Learn more about patch and crack repair">
+          <div class="service-card__media">
+            <picture>
+              <source srcset="images/Imagen 14.avif" type="image/avif">
+              <source srcset="images/Imagen 14.webp" type="image/webp">
+              <img class="service-card__image" src="images/Imagen 14.jpg" alt="Asphalt patch and crack repair service for local pavement damage" width="720" height="520" loading="lazy" decoding="async">
+            </picture>
+            <span class="service-card__number">04</span>
+          </div>
+
+          <div class="service-card__content">
+            <span class="service-card__eyebrow">Prevent Damage</span>
+            <h3>Patch & Crack Repair</h3>
+            <p>
+              Fix cracks, potholes and damaged areas before they become larger,
+              costlier asphalt problems.
+            </p>
+
+            <div class="service-card__footer">
+              <span class="service-card__meta">Stops costly spreading</span>
+              <span class="service-card__arrow" aria-hidden="true">↗</span>
+            </div>
+          </div>
         </a>
       </article>
 
-      <article class="service-card" data-reveal>
-        <div class="service-card__number">05</div>
-        <div class="service-card__icon" aria-hidden="true">
-          <span></span>
-        </div>
-        <h3>Parking Lot Paving</h3>
-        <p>
-          Commercial asphalt paving for parking lots built to handle traffic,
-          improve safety and create a professional first impression.
-        </p>
-        <a href="services.html" aria-label="Learn more about parking lot paving">
-          Learn More
+      <article class="service-card service-card--parking" data-reveal data-tilt-card>
+        <a class="service-card__link" href="services.html" aria-label="Learn more about parking lot paving">
+          <div class="service-card__media">
+            <picture>
+              <source srcset="images/Imagen 12.avif" type="image/avif">
+              <source srcset="images/Imagen 12.webp" type="image/webp">
+              <img class="service-card__image" src="images/Imagen 12.jpg" alt="Commercial parking lot paving for businesses in the Chicago Area" width="720" height="520" loading="lazy" decoding="async">
+            </picture>
+            <span class="service-card__number">05</span>
+          </div>
+
+          <div class="service-card__content">
+            <span class="service-card__eyebrow">Commercial</span>
+            <h3>Parking Lot Paving</h3>
+            <p>
+              Commercial asphalt paving for parking lots built to handle traffic,
+              improve safety and create a professional first impression.
+            </p>
+
+            <div class="service-card__footer">
+              <span class="service-card__meta">Built for traffic flow</span>
+              <span class="service-card__arrow" aria-hidden="true">↗</span>
+            </div>
+          </div>
         </a>
       </article>
 
-      <article class="service-card service-card--highlight" data-reveal>
-        <div class="service-card__number">06</div>
-        <div class="service-card__icon" aria-hidden="true">
-          <span></span>
-        </div>
-        <h3>Driveway Paving</h3>
-        <p>
-          Upgrade your home’s curb appeal with clean, reliable driveway paving
-          designed for everyday use and long-term value.
-        </p>
-        <a href="contact.html" aria-label="Request a free driveway paving estimate">
-          Get Estimate
+      <article class="service-card service-card--driveway service-card--highlight" data-reveal data-tilt-card>
+        <a class="service-card__link" href="contact.html" aria-label="Request a free driveway paving estimate">
+          <div class="service-card__media">
+            <picture>
+              <source srcset="images/Imagen 8.avif" type="image/avif">
+              <source srcset="images/Imagen 8.webp" type="image/webp">
+              <img class="service-card__image" src="images/Imagen 8.jpg" alt="Residential driveway paving completed by Asphalt 365" width="720" height="520" loading="lazy" decoding="async">
+            </picture>
+            <span class="service-card__number">06</span>
+          </div>
+
+          <div class="service-card__content">
+            <span class="service-card__eyebrow">Residential</span>
+            <h3>Driveway Paving</h3>
+            <p>
+              Upgrade your home’s curb appeal with clean, reliable driveway paving
+              designed for everyday use and long-term value.
+            </p>
+
+            <div class="service-card__footer">
+              <span class="service-card__meta">Free estimate available</span>
+              <span class="service-card__arrow" aria-hidden="true">↗</span>
+            </div>
+          </div>
         </a>
       </article>
+    </div>
+  </div>
+</section>
+
+
+<!--------------Sección About Preview---------->
+<section class="section home-about" aria-labelledby="home-about-title">
+  <div class="container home-about__grid">
+    <div class="home-about__visual" data-reveal>
+      <div class="home-about__image-wrap home-about__image-wrap--main">
+        <picture>
+          <source srcset="images/Imagen 4.avif" type="image/avif">
+          <source srcset="images/Imagen 4.webp" type="image/webp">
+          <img class="home-about__image" src="images/Imagen 4.jpg" alt="Asphalt 365 crew completing a clean asphalt paving project" width="820" height="980" loading="lazy" decoding="async">
+        </picture>
+      </div>
+
+      <div class="home-about__image-wrap home-about__image-wrap--small" data-reveal>
+        <picture>
+          <source srcset="images/Imagen 10.avif" type="image/avif">
+          <source srcset="images/Imagen 10.webp" type="image/webp">
+          <img class="home-about__image" src="images/Imagen 10.jpg" alt="Finished asphalt pavement detail with smooth black surface" width="460" height="360" loading="lazy" decoding="async">
+        </picture>
+      </div>
+
+      <div class="home-about__badge" aria-label="Local asphalt company serving St Charles Illinois">
+        <strong>Local</strong>
+        <span>St Charles, IL</span>
+      </div>
+    </div>
+
+    <div class="home-about__content" data-reveal>
+      <span class="eyebrow">About Asphalt 365</span>
+
+      <h2 id="home-about-title">
+        Local Asphalt Work That Looks Better, Lasts Longer and Feels Easier to Book.
+      </h2>
+
+      <p class="text-lead">
+        Asphalt 365 helps homeowners, property managers and business owners upgrade
+        asphalt surfaces with dependable workmanship, clear communication and clean results.
+      </p>
+
+      <div class="home-about__proof">
+        <div class="home-about__proof-item">
+          <span>01</span>
+          <strong>Clear Estimates</strong>
+          <p>No confusing scope. Just straightforward recommendations for your property.</p>
+        </div>
+
+        <div class="home-about__proof-item">
+          <span>02</span>
+          <strong>Clean Finish</strong>
+          <p>We focus on strong edges, proper surface prep and curb appeal.</p>
+        </div>
+
+        <div class="home-about__proof-item">
+          <span>03</span>
+          <strong>Local Response</strong>
+          <p>Service built for St Charles, Kane County and the Chicago Area.</p>
+        </div>
+      </div>
+
+      <div class="home-about__actions">
+        <a class="btn btn-primary" href="contact.html">Free Estimate</a>
+        <a class="btn btn-outline-dark" href="tel:+16304407586">Call 630-440-7586</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!--------------Sección Featured Projects---------->
+<section class="section featured-projects bg-light" aria-labelledby="featured-projects-title">
+  <div class="container">
+    <div class="featured-projects__header" data-reveal>
+      <div class="section-header">
+        <span class="eyebrow">Featured Projects</span>
+
+        <h2 id="featured-projects-title">
+          Recent Asphalt Work With Clean Details and Real Curb Appeal.
+        </h2>
+
+        <p>
+          A focused look at finished paving, maintenance and repair work completed
+          for local residential and commercial properties.
+        </p>
+      </div>
+
+      <a class="btn btn-dark featured-projects__button" href="projects.html">
+        View Projects
+      </a>
+    </div>
+
+    <div class="featured-projects__grid">
+      <article class="project-card" data-reveal data-tilt-card>
+        <a class="project-card__link" href="projects.html" aria-label="View driveway paving project">
+          <picture>
+            <source srcset="images/Imagen 8.avif" type="image/avif">
+            <source srcset="images/Imagen 8.webp" type="image/webp">
+            <img class="project-card__image" src="images/Imagen 8.jpg" alt="Residential driveway paving project in Illinois" width="680" height="520" loading="lazy" decoding="async">
+          </picture>
+
+          <div class="project-card__content">
+            <span>Residential</span>
+            <h3>Driveway Paving</h3>
+            <p>Clean approach, smooth finish and improved curb appeal.</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card project-card--wide" data-reveal data-tilt-card>
+        <a class="project-card__link" href="projects.html" aria-label="View parking lot paving project">
+          <picture>
+            <source srcset="images/Imagen 12.avif" type="image/avif">
+            <source srcset="images/Imagen 12.webp" type="image/webp">
+            <img class="project-card__image" src="images/Imagen 12.jpg" alt="Commercial asphalt parking lot paving project" width="900" height="520" loading="lazy" decoding="async">
+          </picture>
+
+          <div class="project-card__content">
+            <span>Commercial</span>
+            <h3>Parking Lot Paving</h3>
+            <p>Professional asphalt surface built for daily business traffic.</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="project-card" data-reveal data-tilt-card>
+        <a class="project-card__link" href="projects.html" aria-label="View sealcoating project">
+          <picture>
+            <source srcset="images/Imagen 18.avif" type="image/avif">
+            <source srcset="images/Imagen 18.webp" type="image/webp">
+            <img class="project-card__image" src="images/Imagen 18.jpg" alt="Sealcoated asphalt surface with fresh black finish" width="680" height="520" loading="lazy" decoding="async">
+          </picture>
+
+          <div class="project-card__content">
+            <span>Maintenance</span>
+            <h3>Sealcoating</h3>
+            <p>Protective finish that refreshes and extends asphalt life.</p>
+          </div>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!--------------Sección Video Library---------->
+<section class="section work-videos" aria-labelledby="work-videos-title">
+  <div class="container">
+    <div class="work-videos__header" data-reveal>
+      <div class="section-header">
+        <span class="eyebrow">Work Videos</span>
+
+        <h2 id="work-videos-title">
+          See Asphalt 365 Work in Motion.
+        </h2>
+
+        <p>
+          Short videos from real asphalt projects help you see our process,
+          surface quality and jobsite attention before requesting an estimate.
+        </p>
+      </div>
+
+      <a class="btn btn-primary work-videos__button" href="contact.html">
+        Request Free Estimate
+      </a>
+    </div>
+
+    <div class="work-videos__grid">
+      <article class="video-card video-card--featured" data-reveal>
+        <div class="video-card__media">
+          <video
+            class="video-card__video"
+            controls
+            preload="metadata"
+            playsinline
+            poster="images/Imagen 12.jpg"
+            aria-label="Asphalt 365 paving work video"
+          >
+            <source src="videos/Video 15.webm" type="video/webm">
+            <source src="videos/Video 15.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div class="video-card__content">
+          <span>Featured Work</span>
+          <h3>Asphalt Paving in Progress</h3>
+          <p>
+            A quick look at surface preparation, equipment work and the finished asphalt result.
+          </p>
+        </div>
+      </article>
+
+      <article class="video-card" data-reveal>
+        <div class="video-card__media">
+          <video
+            class="video-card__video"
+            controls
+            preload="metadata"
+            playsinline
+            poster="images/Imagen 8.jpg"
+            aria-label="Residential driveway asphalt paving video"
+          >
+            <source src="videos/Video 16.webm" type="video/webm">
+            <source src="videos/Video 16.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div class="video-card__content">
+          <span>Residential</span>
+          <h3>Driveway Surface Work</h3>
+          <p>Clean residential paving details for better curb appeal.</p>
+        </div>
+      </article>
+
+      <article class="video-card" data-reveal>
+        <div class="video-card__media">
+          <video
+            class="video-card__video"
+            controls
+            preload="metadata"
+            playsinline
+            poster="images/Imagen 18.jpg"
+            aria-label="Asphalt sealcoating and surface protection video"
+          >
+            <source src="videos/Video 17.webm" type="video/webm">
+            <source src="videos/Video 17.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <div class="video-card__content">
+          <span>Maintenance</span>
+          <h3>Sealcoating Finish</h3>
+          <p>Fresh black finish designed to protect and restore asphalt appearance.</p>
+        </div>
+      </article>
+    </div>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Asphalt 365 Work Videos",
+        "itemListElement": [
+          {
+            "@type": "VideoObject",
+            "position": 1,
+            "name": "Asphalt Paving in Progress",
+            "description": "Asphalt 365 paving work video showing asphalt surface preparation and finished paving results in the St Charles Illinois area.",
+            "thumbnailUrl": "https://www.asphalt365.com/images/Imagen%2012.jpg",
+            "contentUrl": "https://www.asphalt365.com/videos/Video%2015.mp4",
+            "uploadDate": "2026-05-04"
+          }
+        ]
+      }
+    </script>
+  </div>
+</section>
+
+<!--------------Sección Testimonials---------->
+<section class="section testimonials" aria-labelledby="testimonials-title">
+  <div class="container">
+    <div class="testimonials__header" data-reveal>
+      <div class="section-header">
+        <span class="eyebrow">Client Feedback</span>
+
+        <h2 id="testimonials-title">
+          Trusted by Local Homeowners, Property Managers and Businesses.
+        </h2>
+
+        <p>
+          Real feedback from clients who value clear communication, reliable service
+          and finished asphalt work that looks professional.
+        </p>
+      </div>
+
+      <div class="testimonials__controls" aria-label="Testimonials carousel controls">
+        <button class="testimonials__button" type="button" aria-label="Previous testimonial" data-testimonial-prev>‹</button>
+        <button class="testimonials__button" type="button" aria-label="Next testimonial" data-testimonial-next>›</button>
+      </div>
+    </div>
+
+    <div class="testimonials__carousel" data-testimonial-carousel data-reveal>
+      <div class="testimonials__track" data-testimonial-track>
+        <article class="testimonial-card" data-testimonial-slide>
+          <div class="testimonial-card__rating" aria-label="Five star review">★★★★★</div>
+          <blockquote>
+            “Asphalt 365 was professional from the estimate to the final cleanup.
+            The driveway looks excellent and the process was smooth.”
+          </blockquote>
+          <div class="testimonial-card__author">
+            <span>JM</span>
+            <div>
+              <strong>James M.</strong>
+              <small>Homeowner · St Charles, IL</small>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card testimonial-card--featured" data-testimonial-slide>
+          <div class="testimonial-card__rating" aria-label="Five star review">★★★★★</div>
+          <blockquote>
+            “They helped us upgrade a worn parking area with clear communication,
+            fair pricing and a clean, professional result.”
+          </blockquote>
+          <div class="testimonial-card__author">
+            <span>AL</span>
+            <div>
+              <strong>Angela L.</strong>
+              <small>Property Manager · Chicago Area</small>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card" data-testimonial-slide>
+          <div class="testimonial-card__rating" aria-label="Five star review">★★★★★</div>
+          <blockquote>
+            “Fast response, honest estimate and quality work. We would recommend
+            Asphalt 365 for repair and maintenance.”
+          </blockquote>
+          <div class="testimonial-card__author">
+            <span>RT</span>
+            <div>
+              <strong>Robert T.</strong>
+              <small>Business Owner · Kane County, IL</small>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card" data-testimonial-slide>
+          <div class="testimonial-card__rating" aria-label="Five star review">★★★★★</div>
+          <blockquote>
+            “The crew was on time, respectful and detail-oriented. Our asphalt looks
+            much cleaner and more professional now.”
+          </blockquote>
+          <div class="testimonial-card__author">
+            <span>KS</span>
+            <div>
+              <strong>Karen S.</strong>
+              <small>Residential Client · Illinois</small>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="testimonials__dots" aria-label="Testimonials pagination" data-testimonial-dots></div>
+    </div>
+  </div>
+</section>
+
+<!--------------Sección Benefits / Why Choose Us---------->
+<section class="section why-choose" aria-labelledby="why-choose-title">
+  <div class="container">
+    <div class="why-choose__grid">
+      <div class="why-choose__content" data-reveal>
+        <span class="eyebrow">Why Choose Asphalt 365</span>
+
+        <h2 id="why-choose-title">
+          A Better Asphalt Experience From Estimate to Final Surface.
+        </h2>
+
+        <p class="text-lead">
+          Choosing an asphalt contractor should feel clear, professional and
+          low-stress. Asphalt 365 combines local service, dependable workmanship
+          and conversion-focused communication so property owners know exactly
+          what to expect.
+        </p>
+
+        <div class="why-choose__actions">
+          <a class="btn btn-primary" href="contact.html">Get a Free Estimate</a>
+          <a class="btn btn-outline-light" href="tel:+16304407586">Call 630-440-7586</a>
+        </div>
+      </div>
+
+      <div class="why-choose__cards">
+        <article class="benefit-card benefit-card--highlight" data-reveal>
+          <span class="benefit-card__number">01</span>
+          <div class="benefit-card__icon" aria-hidden="true">
+            <span></span>
+          </div>
+          <h3>Fast Local Estimates</h3>
+          <p>
+            Get straightforward recommendations for driveway paving, parking lots,
+            sealcoating, overlays and asphalt repair in the St Charles area.
+          </p>
+        </article>
+
+        <article class="benefit-card" data-reveal>
+          <span class="benefit-card__number">02</span>
+          <div class="benefit-card__icon" aria-hidden="true">
+            <span></span>
+          </div>
+          <h3>Clean Professional Finish</h3>
+          <p>
+            We focus on surface prep, edges, drainage awareness and details that
+            improve curb appeal and long-term performance.
+          </p>
+        </article>
+
+        <article class="benefit-card" data-reveal>
+          <span class="benefit-card__number">03</span>
+          <div class="benefit-card__icon" aria-hidden="true">
+            <span></span>
+          </div>
+          <h3>Residential & Commercial</h3>
+          <p>
+            From home driveways to business parking lots, our services are built
+            around durable asphalt solutions for real property needs.
+          </p>
+        </article>
+
+        <article class="benefit-card benefit-card--yellow" data-reveal>
+          <span class="benefit-card__number">04</span>
+          <div class="benefit-card__icon" aria-hidden="true">
+            <span></span>
+          </div>
+          <h3>Built for Long-Term Value</h3>
+          <p>
+            Our goal is to help you protect your investment with practical asphalt
+            services that improve safety, appearance and usability.
+          </p>
+        </article>
+      </div>
+    </div>
+
+    <div class="why-choose__strip" data-reveal>
+      <div class="why-choose__strip-item">
+        <strong>St Charles, IL</strong>
+        <span>Local asphalt service area</span>
+      </div>
+
+      <div class="why-choose__strip-item">
+        <strong>Free Estimates</strong>
+        <span>Clear next steps before work begins</span>
+      </div>
+
+      <div class="why-choose__strip-item">
+        <strong>365 Mindset</strong>
+        <span>Reliable asphalt solutions year-round</span>
+      </div>
     </div>
   </div>
 </section>
